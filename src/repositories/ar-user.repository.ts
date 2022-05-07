@@ -7,7 +7,7 @@ import { UserCredentials, UserCredentialsRepository } from '@loopback/authentica
 import { Getter, inject } from '@loopback/core';
 import { DefaultCrudRepository, HasOneRepositoryFactory, juggler, repository } from '@loopback/repository';
 import { DbDataSource, MysqlDatasourceDataSource } from '../datasources';
-import { ArUser, ArUserCredentials, ArUserRelations, Todo, TodoRelations } from '../models';
+import { ArUser, ArUserCredentials, ArUserRelations } from '../models';
 import { ArUserService, Credentials } from '../services/ar-user.service';
 import { ArUserCredentialsRepository } from './ar-user-credentials.repository';
 
