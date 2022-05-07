@@ -1,0 +1,37 @@
+{
+  "ids": {
+    "Todo": 5,
+    "User": 6,
+    "UserCredentials": 6,
+    "ArUser": 7
+  },
+  "models": {
+    "Todo": {
+      "1": "{\"title\":\"Take over the galaxy\",\"desc\":\"MWAHAHAHAHAHAHAHAHAHAHAHAHAMWAHAHAHAHAHAHAHAHAHAHAHAHA\",\"id\":1}",
+      "2": "{\"title\":\"destroy alderaan\",\"desc\":\"Make sure there are no survivors left!\",\"id\":2}",
+      "3": "{\"title\":\"play space invaders\",\"desc\":\"Become the very best!\",\"id\":3}",
+      "4": "{\"title\":\"crush rebel scum\",\"desc\":\"Every.Last.One.\",\"id\":4}"
+    },
+    "User": {
+      "string": "{\"id\":\"string\",\"realm\":\"string\",\"username\":\"string\",\"email\":\"string\",\"emailVerified\":true,\"verificationToken\":\"string\",\"additionalProp1\":{}}",
+      "c8117b76-7247-455e-9c4f-03fba1c8602f": "{\"id\":\"c8117b76-7247-455e-9c4f-03fba1c8602f\",\"realm\":\"string\",\"username\":\"string\",\"email\":\"user1@gmail.com\",\"emailVerified\":true,\"verificationToken\":\"string\",\"additionalProp1\":{}}",
+      "b2768d7a-dd1c-459d-a290-fe53483ede3b": "{\"id\":\"b2768d7a-dd1c-459d-a290-fe53483ede3b\",\"realm\":\"string\",\"username\":\"string\",\"email\":\"user2@gmail.com\",\"emailVerified\":true,\"verificationToken\":\"string\",\"phone\":\"1234567890\",\"phones\":[],\"firstName\":\"string\",\"lastName\":\"string\",\"avatar\":\"string\",\"isActivated\":true,\"activationCode\":\"string\",\"resetPasswordCode\":\"string\"}",
+      "0a041ed8-0bf8-4b23-b6c7-2e48f7cff784": "{\"id\":\"0a041ed8-0bf8-4b23-b6c7-2e48f7cff784\",\"realm\":\"string\",\"username\":\"string\",\"email\":\"user3@gmail.com\",\"emailVerified\":true,\"verificationToken\":\"string\",\"phone\":\"0112345678\",\"phones\":[],\"firstName\":\"string\",\"lastName\":\"string\",\"avatar\":\"string\",\"isActivated\":true,\"activationCode\":\"string\",\"resetPasswordCode\":\"string\"}",
+      "c9e4d0e0-8d98-4bf1-9965-ff6e5ddbe01a": "{\"id\":\"c9e4d0e0-8d98-4bf1-9965-ff6e5ddbe01a\",\"realm\":\"string\",\"username\":\"string\",\"email\":\"user4@gmail.com\",\"emailVerified\":true,\"verificationToken\":\"string\",\"phone\":\"2512345670\",\"phones\":[\"string\"],\"firstName\":\"string\",\"lastName\":\"string\",\"avatar\":\"string\",\"isActivated\":true,\"activationCode\":\"string\",\"resetPasswordCode\":\"string\"}"
+    },
+    "UserCredentials": {
+      "0b5cde17-5ecc-4af9-9d26-d43a9e007bc6": "{\"id\":\"0b5cde17-5ecc-4af9-9d26-d43a9e007bc6\",\"password\":\"$2a$10$FD4PXsm4ZZugw3ATCYrJD.GKPq8L7.iLiDFhfF2kW.PLS66XpyDiC\",\"userId\":\"string\"}",
+      "9dc6bb5c-2b08-4154-9b17-eec8970280a2": "{\"id\":\"9dc6bb5c-2b08-4154-9b17-eec8970280a2\",\"password\":\"$2a$10$ilE3bolqTyV1RlSdw8ofq.qHhos51hKVqUAL6yQWUcScZW1zjE0OC\",\"userId\":\"c8117b76-7247-455e-9c4f-03fba1c8602f\"}",
+      "8cb4dbbe-675b-4a06-b1c5-80d0415e6519": "{\"id\":\"8cb4dbbe-675b-4a06-b1c5-80d0415e6519\",\"password\":\"$2a$10$bwtGHfCzjWUGPK.nqDi0POtKnGAwWVfHCl6IePyHtHw3svVnkXmBC\",\"userId\":\"b2768d7a-dd1c-459d-a290-fe53483ede3b\"}",
+      "88f048e0-d39f-40ea-a9ee-7bf10d6170fb": "{\"id\":\"88f048e0-d39f-40ea-a9ee-7bf10d6170fb\",\"password\":\"$2a$10$nahhaKn4alVLusr6pkoiCeaEs4cAwlPG0SNKiU1EO7c0w3myvWWo6\",\"userId\":\"0a041ed8-0bf8-4b23-b6c7-2e48f7cff784\"}",
+      "c597f97d-3618-47f3-bd41-06f7729ed7eb": "{\"id\":\"c597f97d-3618-47f3-bd41-06f7729ed7eb\",\"password\":\"$2a$10$JoEodp08VQ2vV582ZEFK4.ePSDmdObONId00dbF1/1xVFK7sfDMbK\",\"userId\":\"c9e4d0e0-8d98-4bf1-9965-ff6e5ddbe01a\"}"
+    },
+    "ArUser": {
+      "1e16ab83-1c7c-4085-9e7e-aa16b22f9ff2": "{\"id\":\"1e16ab83-1c7c-4085-9e7e-aa16b22f9ff2\",\"phone\":\"2512345671\",\"email\":\"user5@gmail.com\",\"phones\":[],\"firstName\":\"string\",\"lastName\":\"string\",\"avatar\":\"string\",\"isActivated\":true,\"activationCode\":\"string\",\"resetPasswordCode\":\"string\"}",
+      "a1fbae02-33fe-4431-82c0-b5bff13b3242": "{\"id\":\"a1fbae02-33fe-4431-82c0-b5bff13b3242\",\"phone\":\"2512345672\",\"email\":\"string1@gmail.com\",\"phones\":[],\"password\":\"string123\",\"firstName\":\"string\",\"lastName\":\"string\",\"avatar\":\"string\",\"isActivated\":true,\"activationCode\":\"string\",\"resetPasswordCode\":\"string\"}",
+      "a9474ddd-fd75-43aa-b6b7-c7f1c37dd0ed": "{\"id\":\"a9474ddd-fd75-43aa-b6b7-c7f1c37dd0ed\",\"phone\":\"2512345673\",\"email\":\"string6@gmail.com\",\"phones\":[],\"firstName\":\"string\",\"lastName\":\"string\",\"avatar\":\"string\",\"isActivated\":true,\"activationCode\":\"string\",\"resetPasswordCode\":\"string\"}",
+      "0aae83d5-c4b4-4831-8d4a-ad316033c48a": "{\"id\":\"0aae83d5-c4b4-4831-8d4a-ad316033c48a\",\"phone\":\"2512345673\",\"email\":\"string6@gmail.com\",\"phones\":[],\"firstName\":\"string\",\"lastName\":\"string\",\"avatar\":\"string\",\"isActivated\":true,\"activationCode\":\"string\",\"resetPasswordCode\":\"string\"}",
+      "981d0a27-41bb-4841-9e3b-f4ace4b0c129": "{\"id\":\"981d0a27-41bb-4841-9e3b-f4ace4b0c129\",\"phone\":\"2512345673\",\"email\":\"string6@gmail.com\",\"phones\":[],\"firstName\":\"string\",\"lastName\":\"string\",\"avatar\":\"string\",\"isActivated\":true,\"activationCode\":\"string\",\"resetPasswordCode\":\"string\"}"
+    }
+  }
+}
