@@ -12,7 +12,8 @@
 import { inject } from '@loopback/core';
 import { DefaultCrudRepository, juggler } from '@loopback/repository';
 // import {UserServiceBindings} from '../keys';
-import { ArUserCredentials, ArUserCredentialsRelations } from '../models';
+import { ArUser, ArUserCredentials, ArUserCredentialsRelations } from '../models';
+import { Credentials } from '../services/ar-user.service';
 
 export class ArUserCredentialsRepository extends DefaultCrudRepository<
   ArUserCredentials,
@@ -25,4 +26,20 @@ export class ArUserCredentialsRepository extends DefaultCrudRepository<
   ) {
     super(ArUserCredentials, dataSource);
   }
+
+
+
+  // async findCredentials(
+  //   arUserId: typeof ArUser.prototype.id,
+  // ): Promise<Credentials | undefined> {
+
+  //   // try {
+  //     return await this.findById(arUserId);
+  //   // } catch (err: any) {
+  //   //   if (err.code === 'ENTITY_NOT_FOUND') {
+  //   //     return undefined;
+  //   //   }
+  //   //   throw err;
+  //   // }
+  // }
 }

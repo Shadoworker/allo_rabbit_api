@@ -3,7 +3,6 @@ export declare class ArUserCredentials extends Entity {
     id: string;
     phone: string;
     password: string;
-    userId: string;
     arUserId?: string;
     [prop: string]: any;
     constructor(data?: Partial<ArUserCredentials>);

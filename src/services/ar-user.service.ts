@@ -6,7 +6,7 @@ import { compare } from 'bcryptjs';
 // User --> MyUser
 import { ArUser, ArUserCredentials } from '../models';
 // UserRepository --> ArUserRepository
-import { ArUserRepository } from '../repositories';
+import { ArUserCredentialsRepository, ArUserRepository } from '../repositories';
 
 export type Credentials = {
   phone: string;
@@ -18,6 +18,7 @@ export class ArUserService implements UserService<ArUser, ArUserCredentials> {
   constructor(
     // UserRepository --> ArUserRepository
     @repository(ArUserRepository) public arUserRepository: ArUserRepository,
+    @repository(ArUserCredentialsRepository) public arUserCredentialsRepository: ArUserCredentialsRepository,
   ) { }
 
   // User --> ArUser
@@ -32,10 +33,9 @@ export class ArUserService implements UserService<ArUser, ArUserCredentials> {
     }
 
 
-    const credentialsFound = await this.arUserRepository.findCredentials(
-      foundUser.id,
-    );
+    const credentialsFound = await this.arUserCredentialsRepository.findOne({ where: { arUserId: foundUser.id } })
 
+    // console.log(credentialsFound);
 
     if (!credentialsFound) {
       throw new HttpErrors.Unauthorized(invalidCredentialsError);

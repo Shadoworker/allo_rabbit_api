@@ -40,12 +40,6 @@ tslib_1.__decorate([
         type: 'string',
     }),
     tslib_1.__metadata("design:type", String)
-], ArUserCredentials.prototype, "userId", void 0);
-tslib_1.__decorate([
-    repository_1.property({
-        type: 'string',
-    }),
-    tslib_1.__metadata("design:type", String)
 ], ArUserCredentials.prototype, "arUserId", void 0);
 ArUserCredentials = tslib_1.__decorate([
     repository_1.model({ settings: { strict: false } }),

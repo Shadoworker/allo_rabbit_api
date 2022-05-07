@@ -29,17 +29,6 @@ let ArUserRepository = class ArUserRepository extends repository_1.DefaultCrudRe
         //   this.arUserCredentials.inclusionResolver,
         // );
     }
-    async findCredentials(userId) {
-        try {
-            return await this.findById(userId);
-        }
-        catch (err) {
-            if (err.code === 'ENTITY_NOT_FOUND') {
-                return undefined;
-            }
-            throw err;
-        }
-    }
 };
 ArUserRepository = tslib_1.__decorate([
     tslib_1.__param(0, core_1.inject('datasources.db')),

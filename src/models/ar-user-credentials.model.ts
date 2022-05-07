@@ -30,11 +30,6 @@ export class ArUserCredentials extends Entity {
   @property({
     type: 'string',
   })
-  userId: string;
-
-  @property({
-    type: 'string',
-  })
   arUserId?: string;
 
 

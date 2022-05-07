@@ -12,8 +12,9 @@ const repositories_1 = require("../repositories");
 let ArUserService = class ArUserService {
     constructor(
     // UserRepository --> ArUserRepository
-    arUserRepository) {
+    arUserRepository, arUserCredentialsRepository) {
         this.arUserRepository = arUserRepository;
+        this.arUserCredentialsRepository = arUserCredentialsRepository;
     }
     // User --> ArUser
     async verifyCredentials(credentials) {
@@ -24,7 +25,8 @@ let ArUserService = class ArUserService {
         if (!foundUser) {
             throw new rest_1.HttpErrors.Unauthorized(invalidCredentialsError);
         }
-        const credentialsFound = await this.arUserRepository.findCredentials(foundUser.id);
+        const credentialsFound = await this.arUserCredentialsRepository.findOne({ where: { arUserId: foundUser.id } });
+        // console.log(credentialsFound);
         if (!credentialsFound) {
             throw new rest_1.HttpErrors.Unauthorized(invalidCredentialsError);
         }
@@ -47,7 +49,9 @@ let ArUserService = class ArUserService {
 };
 ArUserService = tslib_1.__decorate([
     tslib_1.__param(0, repository_1.repository(repositories_1.ArUserRepository)),
-    tslib_1.__metadata("design:paramtypes", [repositories_1.ArUserRepository])
+    tslib_1.__param(1, repository_1.repository(repositories_1.ArUserCredentialsRepository)),
+    tslib_1.__metadata("design:paramtypes", [repositories_1.ArUserRepository,
+        repositories_1.ArUserCredentialsRepository])
 ], ArUserService);
 exports.ArUserService = ArUserService;
 //# sourceMappingURL=ar-user.service.js.map

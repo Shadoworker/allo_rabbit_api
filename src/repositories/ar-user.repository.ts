@@ -44,16 +44,17 @@ export class ArUserRepository extends DefaultCrudRepository<
   }
 
 
-  async findCredentials(
-    userId: typeof ArUser.prototype.id,
-  ): Promise<Credentials | undefined> {
-    try {
-      return await this.findById(userId);
-    } catch (err: any) {
-      if (err.code === 'ENTITY_NOT_FOUND') {
-        return undefined;
-      }
-      throw err;
-    }
-  }
+  // async findCredentials(
+  //   arUserId: typeof ArUser.prototype.id,
+  // ): Promise<Credentials | undefined> {
+
+  //   try {
+  //     return await this.findById(arUserId);
+  //   } catch (err: any) {
+  //     if (err.code === 'ENTITY_NOT_FOUND') {
+  //       return undefined;
+  //     }
+  //     throw err;
+  //   }
+  // }
 }
