@@ -25,7 +25,6 @@ import morgan from 'morgan';
 import path from 'path';
 import { MySequence } from './sequence';
 import { ArUserRepository } from './repositories';
-import { ArUserServiceBindings } from './services/ar-user.bindings';
 
 export { ApplicationConfig };
 

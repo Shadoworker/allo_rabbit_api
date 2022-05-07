@@ -21,7 +21,7 @@ export class ArUserCredentialsRepository extends DefaultCrudRepository<
   ArUserCredentialsRelations
 > {
   constructor(
-    @inject(`datasources.db`)
+    @inject(`datasources.mysqlDatasource`)
     dataSource: juggler.DataSource,
   ) {
     super(ArUserCredentials, dataSource);

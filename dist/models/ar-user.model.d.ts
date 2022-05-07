@@ -6,7 +6,6 @@ export declare class ArUser extends Entity {
     email: string;
     phones?: string[];
     password: string;
-    arUserCredentials: ArUserCredentials;
     firstName?: string;
     lastName?: string;
     avatar?: string;
@@ -14,6 +13,7 @@ export declare class ArUser extends Entity {
     activationCode?: string;
     resetPasswordCode?: string;
     userCredentials: ArUserCredentials;
+    arUserCredentials: ArUserCredentials;
     [prop: string]: any;
     constructor(data?: Partial<ArUser>);
 }

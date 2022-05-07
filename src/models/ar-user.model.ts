@@ -63,9 +63,6 @@ export class ArUser extends Entity {
   })
   password: string;
 
-  @hasOne(() => ArUserCredentials)
-  arUserCredentials: ArUserCredentials;
-
   @property({
     type: 'string',
   })
@@ -96,9 +93,12 @@ export class ArUser extends Entity {
   })
   resetPasswordCode?: string;
 
-
   @hasOne(() => ArUserCredentials)
   userCredentials: ArUserCredentials;
+
+  @hasOne(() => ArUserCredentials)
+  arUserCredentials: ArUserCredentials;
+
   // @hasOne(() => Language)
   // language: Language;
   // Define well-known properties here

@@ -6,9 +6,8 @@
 import { UserCredentials, UserCredentialsRepository } from '@loopback/authentication-jwt';
 import { Getter, inject } from '@loopback/core';
 import { DefaultCrudRepository, HasOneRepositoryFactory, juggler, repository } from '@loopback/repository';
-import { DbDataSource } from '../datasources';
+import { DbDataSource, MysqlDatasourceDataSource } from '../datasources';
 import { ArUser, ArUserCredentials, ArUserRelations, Todo, TodoRelations } from '../models';
-import { ArUserServiceBindings } from '../services/ar-user.bindings';
 import { ArUserService, Credentials } from '../services/ar-user.service';
 import { ArUserCredentialsRepository } from './ar-user-credentials.repository';
 
@@ -23,7 +22,7 @@ export class ArUserRepository extends DefaultCrudRepository<
   public readonly arUserCredentials: HasOneRepositoryFactory<ArUserCredentials, typeof ArUser.prototype.id>;
 
   constructor(
-    @inject('datasources.db') dataSource: DbDataSource,
+    @inject('datasources.mysqlDatasource') dataSource: MysqlDatasourceDataSource,
     // @inject(`datasources.${ArUserServiceBindings.DATASOURCE_NAME}`)
     // dataSource: juggler.DataSource,
     @repository.getter('ArUserCredentialsRepository')

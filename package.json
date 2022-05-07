@@ -1,6 +1,6 @@
 {
-  "name": "@loopback/example-todo",
-  "description": "Tutorial example on how to build an application with LoopBack 4",
+  "name": "allo_rabbit_api",
+  "description": "Allo Rabbit API with LoopBack 4",
   "version": "6.0.0",
   "keywords": [
     "loopback",
@@ -59,6 +59,7 @@
     "@loopback/rest": "^10.0.0",
     "@loopback/rest-explorer": "^3.3.2",
     "@loopback/service-proxy": "^3.2.2",
+    "loopback-connector-mysql": "^5.4.4",
     "loopback-connector-rest": "^4.0.1",
     "morgan": "^1.10.0",
     "tsc-watch": "^5.0.3",

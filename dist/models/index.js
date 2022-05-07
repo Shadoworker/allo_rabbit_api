@@ -8,4 +8,5 @@ const tslib_1 = require("tslib");
 tslib_1.__exportStar(require("./todo.model"), exports);
 tslib_1.__exportStar(require("./ar-user.model"), exports);
 tslib_1.__exportStar(require("./ar-user-credentials.model"), exports);
+tslib_1.__exportStar(require("./roles.model"), exports);
 //# sourceMappingURL=index.js.map
