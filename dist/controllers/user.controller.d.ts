@@ -1,8 +1,7 @@
 import { TokenService } from '@loopback/authentication';
-import { Credentials } from '@loopback/authentication-jwt';
 import { SchemaObject } from '@loopback/rest';
 import { UserProfile } from '@loopback/security';
-import { ArUser } from '../models';
+import { ArUser, ArUserCredentials } from '../models';
 import { ArUserRepository } from '../repositories';
 import { ArUserService } from '../services/ar-user.service';
 export declare const CredentialsRequestBody: {
@@ -20,7 +19,7 @@ export declare class UserController {
     user: UserProfile;
     protected userRepository: ArUserRepository;
     constructor(jwtService: TokenService, userService: ArUserService, user: UserProfile, userRepository: ArUserRepository);
-    login(credentials: Credentials): Promise<{
+    login(credentials: ArUserCredentials): Promise<{
         token: string;
     }>;
     whoAmI(currentUserProfile: UserProfile): Promise<string>;

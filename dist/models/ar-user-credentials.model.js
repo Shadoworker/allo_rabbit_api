@@ -27,6 +27,13 @@ tslib_1.__decorate([
         required: true,
     }),
     tslib_1.__metadata("design:type", String)
+], ArUserCredentials.prototype, "phone", void 0);
+tslib_1.__decorate([
+    repository_1.property({
+        type: 'string',
+        required: true,
+    }),
+    tslib_1.__metadata("design:type", String)
 ], ArUserCredentials.prototype, "password", void 0);
 tslib_1.__decorate([
     repository_1.property({

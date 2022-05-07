@@ -24,7 +24,7 @@ import {
 import { SecurityBindings, securityId, UserProfile } from '@loopback/security';
 import { genSalt, hash } from 'bcryptjs';
 import _ from 'lodash';
-import { ArUser } from '../models';
+import { ArUser, ArUserCredentials } from '../models';
 import { ArUserRepository } from '../repositories';
 import { ArUserService } from '../services/ar-user.service';
 
@@ -82,7 +82,7 @@ export class UserController {
     },
   })
   async login(
-    @requestBody(CredentialsRequestBody) credentials: Credentials,
+    @requestBody(CredentialsRequestBody) credentials: ArUserCredentials,
   ): Promise<{ token: string }> {
     // ensure the user exists, and the password is correct
     const user = await this.userService.verifyCredentials(credentials);
@@ -143,13 +143,17 @@ export class UserController {
     })
     newUserRequest: ArUser,
   ): Promise<ArUser> {
+
+
     const password = await hash(newUserRequest.password, await genSalt());
     const savedUser = await this.userRepository.create(
       _.omit(newUserRequest, 'password'),
       // newUserRequest
     );
 
-    await this.userRepository.userCredentials(savedUser.id).create({ password });
+    console.log(newUserRequest);
+
+    // await this.userRepository.userCredentials(savedUser.id).create({ password });
 
     return savedUser;
   }

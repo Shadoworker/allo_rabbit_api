@@ -34,7 +34,7 @@ let ArUserRepository = class ArUserRepository extends repository_1.DefaultCrudRe
 };
 ArUserRepository = tslib_1.__decorate([
     tslib_1.__param(0, core_1.inject('datasources.db')),
-    tslib_1.__param(1, repository_1.repository.getter('UserCredentialsRepository')),
+    tslib_1.__param(1, repository_1.repository.getter('ArUserCredentialsRepository')),
     tslib_1.__metadata("design:paramtypes", [datasources_1.DbDataSource, Function])
 ], ArUserRepository);
 exports.ArUserRepository = ArUserRepository;

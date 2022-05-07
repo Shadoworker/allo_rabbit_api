@@ -4,7 +4,7 @@ import { HttpErrors } from '@loopback/rest';
 import { securityId, UserProfile } from '@loopback/security';
 import { compare } from 'bcryptjs';
 // User --> MyUser
-import { ArUser } from '../models';
+import { ArUser, ArUserCredentials } from '../models';
 // UserRepository --> ArUserRepository
 import { ArUserRepository } from '../repositories';
 
@@ -14,14 +14,14 @@ export type Credentials = {
 };
 
 // User --> ArUser
-export class ArUserService implements UserService<ArUser, Credentials> {
+export class ArUserService implements UserService<ArUser, ArUserCredentials> {
   constructor(
     // UserRepository --> ArUserRepository
     @repository(ArUserRepository) public arUserRepository: ArUserRepository,
   ) { }
 
   // User --> ArUser
-  async verifyCredentials(credentials: Credentials): Promise<ArUser> {
+  async verifyCredentials(credentials: ArUserCredentials): Promise<ArUser> {
     const invalidCredentialsError = 'Invalid phone or password.';
 
     const foundUser = await this.arUserRepository.findOne({

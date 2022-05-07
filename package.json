@@ -45,7 +45,7 @@
     "openapi-spec": "node ./dist/openapi-spec",
     "rebuild": "npm run clean && npm run build",
     "prestart": "npm run rebuild",
-    "start": "node ."
+    "start": "tsc-watch -b --onSuccess \"node .\""
   },
   "publishConfig": {
     "access": "public"
@@ -61,6 +61,7 @@
     "@loopback/service-proxy": "^3.2.2",
     "loopback-connector-rest": "^4.0.1",
     "morgan": "^1.10.0",
+    "tsc-watch": "^5.0.3",
     "tslib": "^2.0.0"
   },
   "devDependencies": {

@@ -60,7 +60,8 @@ let UserController = class UserController {
     async signUp(newUserRequest) {
         const password = await bcryptjs_1.hash(newUserRequest.password, await bcryptjs_1.genSalt());
         const savedUser = await this.userRepository.create(lodash_1.default.omit(newUserRequest, 'password'));
-        await this.userRepository.userCredentials(savedUser.id).create({ password });
+        console.log(newUserRequest);
+        // await this.userRepository.userCredentials(savedUser.id).create({ password });
         return savedUser;
     }
 };
@@ -86,7 +87,7 @@ tslib_1.__decorate([
     }),
     tslib_1.__param(0, rest_1.requestBody(exports.CredentialsRequestBody)),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:paramtypes", [models_1.ArUserCredentials]),
     tslib_1.__metadata("design:returntype", Promise)
 ], UserController.prototype, "login", null);
 tslib_1.__decorate([

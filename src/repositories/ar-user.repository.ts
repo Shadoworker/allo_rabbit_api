@@ -10,6 +10,7 @@ import { DbDataSource } from '../datasources';
 import { ArUser, ArUserCredentials, ArUserRelations, Todo, TodoRelations } from '../models';
 import { ArUserServiceBindings } from '../services/ar-user.bindings';
 import { ArUserService, Credentials } from '../services/ar-user.service';
+import { ArUserCredentialsRepository } from './ar-user-credentials.repository';
 
 export class ArUserRepository extends DefaultCrudRepository<
   ArUser,
@@ -18,15 +19,15 @@ export class ArUserRepository extends DefaultCrudRepository<
 
 > {
   public readonly userCredentials: HasOneRepositoryFactory<
-    UserCredentials,
+    ArUserCredentials,
     typeof ArUser.prototype.id
   >;
   constructor(
     @inject('datasources.db') dataSource: DbDataSource,
     // @inject(`datasources.${ArUserServiceBindings.DATASOURCE_NAME}`)
     // dataSource: juggler.DataSource,
-    @repository.getter('UserCredentialsRepository')
-    protected userCredentialsRepositoryGetter: Getter<UserCredentialsRepository>,
+    @repository.getter('ArUserCredentialsRepository')
+    protected userCredentialsRepositoryGetter: Getter<ArUserCredentialsRepository>,
   ) {
     super(ArUser, dataSource);
 

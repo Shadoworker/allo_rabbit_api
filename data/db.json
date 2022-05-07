@@ -3,7 +3,7 @@
     "Todo": 5,
     "User": 6,
     "UserCredentials": 6,
-    "ArUser": 7
+    "ArUser": 19
   },
   "models": {
     "Todo": {
@@ -30,8 +30,9 @@
       "1e16ab83-1c7c-4085-9e7e-aa16b22f9ff2": "{\"id\":\"1e16ab83-1c7c-4085-9e7e-aa16b22f9ff2\",\"phone\":\"2512345671\",\"email\":\"user5@gmail.com\",\"phones\":[],\"firstName\":\"string\",\"lastName\":\"string\",\"avatar\":\"string\",\"isActivated\":true,\"activationCode\":\"string\",\"resetPasswordCode\":\"string\"}",
       "a1fbae02-33fe-4431-82c0-b5bff13b3242": "{\"id\":\"a1fbae02-33fe-4431-82c0-b5bff13b3242\",\"phone\":\"2512345672\",\"email\":\"string1@gmail.com\",\"phones\":[],\"password\":\"string123\",\"firstName\":\"string\",\"lastName\":\"string\",\"avatar\":\"string\",\"isActivated\":true,\"activationCode\":\"string\",\"resetPasswordCode\":\"string\"}",
       "a9474ddd-fd75-43aa-b6b7-c7f1c37dd0ed": "{\"id\":\"a9474ddd-fd75-43aa-b6b7-c7f1c37dd0ed\",\"phone\":\"2512345673\",\"email\":\"string6@gmail.com\",\"phones\":[],\"firstName\":\"string\",\"lastName\":\"string\",\"avatar\":\"string\",\"isActivated\":true,\"activationCode\":\"string\",\"resetPasswordCode\":\"string\"}",
-      "0aae83d5-c4b4-4831-8d4a-ad316033c48a": "{\"id\":\"0aae83d5-c4b4-4831-8d4a-ad316033c48a\",\"phone\":\"2512345673\",\"email\":\"string6@gmail.com\",\"phones\":[],\"firstName\":\"string\",\"lastName\":\"string\",\"avatar\":\"string\",\"isActivated\":true,\"activationCode\":\"string\",\"resetPasswordCode\":\"string\"}",
-      "981d0a27-41bb-4841-9e3b-f4ace4b0c129": "{\"id\":\"981d0a27-41bb-4841-9e3b-f4ace4b0c129\",\"phone\":\"2512345673\",\"email\":\"string6@gmail.com\",\"phones\":[],\"firstName\":\"string\",\"lastName\":\"string\",\"avatar\":\"string\",\"isActivated\":true,\"activationCode\":\"string\",\"resetPasswordCode\":\"string\"}"
+      "2b5dbedc-9347-472d-8fea-eb63cb3bae4c": "{\"id\":\"2b5dbedc-9347-472d-8fea-eb63cb3bae4c\",\"phone\":\"2512345673\",\"email\":\"string6@gmail.com\",\"phones\":[],\"firstName\":\"string\",\"lastName\":\"string\",\"avatar\":\"string\",\"isActivated\":true,\"activationCode\":\"string\",\"resetPasswordCode\":\"string\"}",
+      "06e4cec5-38b5-4e8c-9e08-de6a0bab74a7": "{\"id\":\"06e4cec5-38b5-4e8c-9e08-de6a0bab74a7\",\"phone\":\"2512345673\",\"email\":\"string6@gmail.com\",\"phones\":[],\"firstName\":\"string\",\"lastName\":\"string\",\"avatar\":\"string\",\"isActivated\":true,\"activationCode\":\"string\",\"resetPasswordCode\":\"string\"}",
+      "0e652816-7cc9-477d-91b9-3fad0498c748": "{\"id\":\"0e652816-7cc9-477d-91b9-3fad0498c748\",\"phone\":\"2512345673\",\"email\":\"string6@gmail.com\",\"phones\":[],\"firstName\":\"string\",\"lastName\":\"string\",\"avatar\":\"string\",\"isActivated\":true,\"activationCode\":\"string\",\"resetPasswordCode\":\"string\"}"
     }
   }
 }
