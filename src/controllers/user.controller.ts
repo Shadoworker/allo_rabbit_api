@@ -124,7 +124,7 @@ export class UserController {
         content: {
           'application/json': {
             schema: {
-              'x-ts-type': User,
+              'x-ts-type': ArUser,
             },
           },
         },
@@ -151,9 +151,9 @@ export class UserController {
       // newUserRequest
     );
 
-    console.log(newUserRequest);
+    console.log(savedUser);
 
-    // await this.userRepository.userCredentials(savedUser.id).create({ password });
+    await this.userRepository.arUserCredentials(savedUser.id).create({ password });
 
     return savedUser;
   }

@@ -40,7 +40,6 @@ export class ArUser extends Entity {
 
   @property({
     type: 'string',
-    required: true,
   })
   phone: string;
 
@@ -63,6 +62,9 @@ export class ArUser extends Entity {
     type: 'string'
   })
   password: string;
+
+  @hasOne(() => ArUserCredentials)
+  arUserCredentials: ArUserCredentials;
 
   @property({
     type: 'string',

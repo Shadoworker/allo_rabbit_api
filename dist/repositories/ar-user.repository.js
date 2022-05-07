@@ -14,11 +14,20 @@ let ArUserRepository = class ArUserRepository extends repository_1.DefaultCrudRe
     constructor(dataSource, 
     // @inject(`datasources.${ArUserServiceBindings.DATASOURCE_NAME}`)
     // dataSource: juggler.DataSource,
-    userCredentialsRepositoryGetter) {
+    userCredentialsRepositoryGetter, arUserCredentialsRepositoryGetter) {
         super(models_1.ArUser, dataSource);
         this.userCredentialsRepositoryGetter = userCredentialsRepositoryGetter;
-        this.userCredentials = this.createHasOneRepositoryFactoryFor('userCredentials', userCredentialsRepositoryGetter);
-        this.registerInclusionResolver('userCredentials', this.userCredentials.inclusionResolver);
+        this.arUserCredentialsRepositoryGetter = arUserCredentialsRepositoryGetter;
+        this.arUserCredentials = this.createHasOneRepositoryFactoryFor('arUserCredentials', arUserCredentialsRepositoryGetter);
+        this.registerInclusionResolver('arUserCredentials', this.arUserCredentials.inclusionResolver);
+        // this.arUserCredentials = this.createHasOneRepositoryFactoryFor(
+        //   'userCredentials',
+        //   userCredentialsRepositoryGetter,
+        // );
+        // this.registerInclusionResolver(
+        //   'userCredentials',
+        //   this.arUserCredentials.inclusionResolver,
+        // );
     }
     async findCredentials(userId) {
         try {
@@ -35,7 +44,8 @@ let ArUserRepository = class ArUserRepository extends repository_1.DefaultCrudRe
 ArUserRepository = tslib_1.__decorate([
     tslib_1.__param(0, core_1.inject('datasources.db')),
     tslib_1.__param(1, repository_1.repository.getter('ArUserCredentialsRepository')),
-    tslib_1.__metadata("design:paramtypes", [datasources_1.DbDataSource, Function])
+    tslib_1.__param(2, repository_1.repository.getter('ArUserCredentialsRepository')),
+    tslib_1.__metadata("design:paramtypes", [datasources_1.DbDataSource, Function, Function])
 ], ArUserRepository);
 exports.ArUserRepository = ArUserRepository;
 //# sourceMappingURL=ar-user.repository.js.map

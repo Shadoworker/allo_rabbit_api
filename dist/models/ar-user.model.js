@@ -23,7 +23,6 @@ tslib_1.__decorate([
 tslib_1.__decorate([
     repository_1.property({
         type: 'string',
-        required: true,
     }),
     tslib_1.__metadata("design:type", String)
 ], ArUser.prototype, "phone", void 0);
@@ -50,6 +49,10 @@ tslib_1.__decorate([
     }),
     tslib_1.__metadata("design:type", String)
 ], ArUser.prototype, "password", void 0);
+tslib_1.__decorate([
+    repository_1.hasOne(() => ar_user_credentials_model_1.ArUserCredentials),
+    tslib_1.__metadata("design:type", ar_user_credentials_model_1.ArUserCredentials)
+], ArUser.prototype, "arUserCredentials", void 0);
 tslib_1.__decorate([
     repository_1.property({
         type: 'string',

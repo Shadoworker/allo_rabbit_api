@@ -18,27 +18,29 @@ export class ArUserRepository extends DefaultCrudRepository<
   ArUserRelations
 
 > {
-  public readonly userCredentials: HasOneRepositoryFactory<
-    ArUserCredentials,
-    typeof ArUser.prototype.id
-  >;
+
+
+  public readonly arUserCredentials: HasOneRepositoryFactory<ArUserCredentials, typeof ArUser.prototype.id>;
+
   constructor(
     @inject('datasources.db') dataSource: DbDataSource,
     // @inject(`datasources.${ArUserServiceBindings.DATASOURCE_NAME}`)
     // dataSource: juggler.DataSource,
     @repository.getter('ArUserCredentialsRepository')
-    protected userCredentialsRepositoryGetter: Getter<ArUserCredentialsRepository>,
+    protected userCredentialsRepositoryGetter: Getter<ArUserCredentialsRepository>, @repository.getter('ArUserCredentialsRepository') protected arUserCredentialsRepositoryGetter: Getter<ArUserCredentialsRepository>,
   ) {
     super(ArUser, dataSource);
+    this.arUserCredentials = this.createHasOneRepositoryFactoryFor('arUserCredentials', arUserCredentialsRepositoryGetter);
+    this.registerInclusionResolver('arUserCredentials', this.arUserCredentials.inclusionResolver);
 
-    this.userCredentials = this.createHasOneRepositoryFactoryFor(
-      'userCredentials',
-      userCredentialsRepositoryGetter,
-    );
-    this.registerInclusionResolver(
-      'userCredentials',
-      this.userCredentials.inclusionResolver,
-    );
+    // this.arUserCredentials = this.createHasOneRepositoryFactoryFor(
+    //   'userCredentials',
+    //   userCredentialsRepositoryGetter,
+    // );
+    // this.registerInclusionResolver(
+    //   'userCredentials',
+    //   this.arUserCredentials.inclusionResolver,
+    // );
   }
 
 

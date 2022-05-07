@@ -17,7 +17,7 @@ export class ArUserCredentials extends Entity {
 
   @property({
     type: 'string',
-    required: true,
+    // required: true,
   })
   phone: string;
 

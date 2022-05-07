@@ -6,6 +6,7 @@ export declare class ArUser extends Entity {
     email: string;
     phones?: string[];
     password: string;
+    arUserCredentials: ArUserCredentials;
     firstName?: string;
     lastName?: string;
     avatar?: string;
