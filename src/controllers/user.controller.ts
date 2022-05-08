@@ -85,7 +85,7 @@ export class UserController {
     @requestBody(CredentialsRequestBody) credentials: ArUserCredentials,
   ): Promise<{ token: string }> {
 
-    console.log(credentials)
+    // console.log(credentials)
 
     // ensure the user exists, and the password is correct
     const user = await this.userService.verifyCredentials(credentials);
@@ -153,8 +153,7 @@ export class UserController {
       _.omit(newUserRequest, 'password'),
       // newUserRequest
     );
-
-    console.log(savedUser);
+    // console.log(savedUser);
 
     await this.userRepository.arUserCredentials(savedUser.id).create({ password });
 
