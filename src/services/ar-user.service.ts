@@ -9,8 +9,10 @@ import { ArUser, ArUserCredentials } from '../models';
 import { ArUserCredentialsRepository, ArUserRepository } from '../repositories';
 
 export type Credentials = {
+  id: string;
   phone: string;
   password: string;
+
 };
 
 // User --> ArUser
@@ -22,11 +24,11 @@ export class ArUserService implements UserService<ArUser, ArUserCredentials> {
   ) { }
 
   // User --> ArUser
-  async verifyCredentials(credentials: ArUserCredentials): Promise<ArUser> {
+  async verifyCredentials(arusercredentials: ArUserCredentials): Promise<ArUser> {
     const invalidCredentialsError = 'Invalid phone or password.';
 
     const foundUser = await this.arUserRepository.findOne({
-      where: { phone: credentials.phone },
+      where: { phone: arusercredentials.phone },
     });
     if (!foundUser) {
       throw new HttpErrors.Unauthorized(invalidCredentialsError);
@@ -42,7 +44,7 @@ export class ArUserService implements UserService<ArUser, ArUserCredentials> {
     }
 
     const passwordMatched = await compare(
-      credentials.password,
+      arusercredentials.password,
       credentialsFound.password,
     );
 
