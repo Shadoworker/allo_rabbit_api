@@ -22,3 +22,4 @@ export * from './restaurant.model';
 export * from './sos.model';
 export * from './city.model';
 export * from './restaurant-category.model';
+export * from './rdv.model';

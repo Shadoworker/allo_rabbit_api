@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {Restaurant} from './restaurant.model';
 
 @model({settings: {strict: false}})
 export class RestaurantValidationRequest extends Entity {
@@ -14,6 +15,8 @@ export class RestaurantValidationRequest extends Entity {
   })
   status?: string;
 
+  @belongsTo(() => Restaurant)
+  restaurantId: string;
   // Define well-known properties here
 
   // Indexer property to allow additional data

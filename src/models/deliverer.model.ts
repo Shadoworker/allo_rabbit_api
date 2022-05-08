@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {ArUser} from './ar-user.model';
 
 @model({settings: {strict: false}})
 export class Deliverer extends Entity {
@@ -19,6 +20,8 @@ export class Deliverer extends Entity {
   })
   isAvailable?: boolean;
 
+  @belongsTo(() => ArUser)
+  arUserId: string;
   // Define well-known properties here
 
   // Indexer property to allow additional data

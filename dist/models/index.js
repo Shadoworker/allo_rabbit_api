@@ -24,4 +24,5 @@ tslib_1.__exportStar(require("./restaurant.model"), exports);
 tslib_1.__exportStar(require("./sos.model"), exports);
 tslib_1.__exportStar(require("./city.model"), exports);
 tslib_1.__exportStar(require("./restaurant-category.model"), exports);
+tslib_1.__exportStar(require("./rdv.model"), exports);
 //# sourceMappingURL=index.js.map

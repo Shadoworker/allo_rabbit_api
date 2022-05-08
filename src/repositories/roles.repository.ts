@@ -1,7 +1,7 @@
-import {inject} from '@loopback/core';
-import {DefaultCrudRepository} from '@loopback/repository';
-import {MysqlDatasourceDataSource} from '../datasources';
-import {Roles, RolesRelations} from '../models';
+import { inject } from '@loopback/core';
+import { DefaultCrudRepository } from '@loopback/repository';
+import { MysqlDatasourceDataSource } from '../datasources';
+import { Roles, RolesRelations } from '../models';
 
 export class RolesRepository extends DefaultCrudRepository<
   Roles,

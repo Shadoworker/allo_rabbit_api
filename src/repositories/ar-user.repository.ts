@@ -5,11 +5,12 @@
 
 import { UserCredentials, UserCredentialsRepository } from '@loopback/authentication-jwt';
 import { Getter, inject } from '@loopback/core';
-import { DefaultCrudRepository, HasOneRepositoryFactory, juggler, repository } from '@loopback/repository';
+import { DefaultCrudRepository, HasOneRepositoryFactory, juggler, repository, HasManyRepositoryFactory} from '@loopback/repository';
 import { DbDataSource, MysqlDatasourceDataSource } from '../datasources';
-import { ArUser, ArUserCredentials, ArUserRelations } from '../models';
+import { ArUser, ArUserCredentials, ArUserRelations, Roles} from '../models';
 import { ArUserService, Credentials } from '../services/ar-user.service';
 import { ArUserCredentialsRepository } from './ar-user-credentials.repository';
+import {RolesRepository} from './roles.repository';
 
 export class ArUserRepository extends DefaultCrudRepository<
   ArUser,
@@ -21,14 +22,18 @@ export class ArUserRepository extends DefaultCrudRepository<
 
   public readonly arUserCredentials: HasOneRepositoryFactory<ArUserCredentials, typeof ArUser.prototype.id>;
 
+  public readonly roles: HasManyRepositoryFactory<Roles, typeof ArUser.prototype.id>;
+
   constructor(
     @inject('datasources.mysqlDatasource') dataSource: MysqlDatasourceDataSource,
     // @inject(`datasources.${ArUserServiceBindings.DATASOURCE_NAME}`)
     // dataSource: juggler.DataSource,
     @repository.getter('ArUserCredentialsRepository')
-    protected userCredentialsRepositoryGetter: Getter<ArUserCredentialsRepository>, @repository.getter('ArUserCredentialsRepository') protected arUserCredentialsRepositoryGetter: Getter<ArUserCredentialsRepository>,
+    protected userCredentialsRepositoryGetter: Getter<ArUserCredentialsRepository>, @repository.getter('ArUserCredentialsRepository') protected arUserCredentialsRepositoryGetter: Getter<ArUserCredentialsRepository>, @repository.getter('RolesRepository') protected rolesRepositoryGetter: Getter<RolesRepository>,
   ) {
     super(ArUser, dataSource);
+    this.roles = this.createHasManyRepositoryFactoryFor('roles', rolesRepositoryGetter,);
+    this.registerInclusionResolver('roles', this.roles.inclusionResolver);
     this.arUserCredentials = this.createHasOneRepositoryFactoryFor('arUserCredentials', arUserCredentialsRepositoryGetter);
     this.registerInclusionResolver('arUserCredentials', this.arUserCredentials.inclusionResolver);
 

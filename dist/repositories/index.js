@@ -23,5 +23,6 @@ tslib_1.__exportStar(require("./restaurant-category.repository"), exports);
 tslib_1.__exportStar(require("./restaurant-validation-request.repository"), exports);
 tslib_1.__exportStar(require("./restaurant.repository"), exports);
 tslib_1.__exportStar(require("./roles.repository"), exports);
+tslib_1.__exportStar(require("./rdv.repository"), exports);
 tslib_1.__exportStar(require("./sos.repository"), exports);
 //# sourceMappingURL=index.js.map

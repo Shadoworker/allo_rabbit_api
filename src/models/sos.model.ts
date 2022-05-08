@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {Deliverer} from './deliverer.model';
 
 @model({settings: {strict: false}})
 export class Sos extends Entity {
@@ -19,6 +20,8 @@ export class Sos extends Entity {
   })
   message?: string;
 
+  @belongsTo(() => Deliverer)
+  delivererId: string;
   // Define well-known properties here
 
   // Indexer property to allow additional data

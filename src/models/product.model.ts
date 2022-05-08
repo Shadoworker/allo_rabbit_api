@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasOne} from '@loopback/repository';
+import {ProductCategory} from './product-category.model';
 
 @model({settings: {strict: false}})
 export class Product extends Entity {
@@ -65,6 +66,8 @@ export class Product extends Entity {
   })
   description?: string;
 
+  @hasOne(() => ProductCategory)
+  productCategory: ProductCategory;
   // Define well-known properties here
 
   // Indexer property to allow additional data

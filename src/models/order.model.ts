@@ -1,4 +1,7 @@
-import {Entity, model, property} from '@loopback/repository';
+import { Entity, model, property, belongsTo, hasOne } from '@loopback/repository';
+import { ArUser } from './ar-user.model';
+import {Restaurant} from './restaurant.model';
+import {Currency} from './currency.model';
 
 @model({settings: {strict: false}})
 export class Order extends Entity {
@@ -29,6 +32,14 @@ export class Order extends Entity {
   })
   updated_at?: string;
 
+  @belongsTo(() => ArUser)
+  arUserId: string;
+
+  @belongsTo(() => Restaurant)
+  restaurantId: string;
+
+  @hasOne(() => Currency)
+  currency: Currency;
   // Define well-known properties here
 
   // Indexer property to allow additional data

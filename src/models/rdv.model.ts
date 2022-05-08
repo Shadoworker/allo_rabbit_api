@@ -1,7 +1,8 @@
-import {Entity, model, property} from '@loopback/repository';
+import { Entity, model, property, belongsTo} from '@loopback/repository';
+import {ArUser} from './ar-user.model';
 
 @model({settings: {strict: false}})
-export class Currency extends Entity {
+export class Rdv extends Entity {
   @property({
     type: 'string',
     id: true,
@@ -10,32 +11,40 @@ export class Currency extends Entity {
   id?: string;
 
   @property({
-    type: 'string',
+    type: 'date',
   })
-  name?: string;
+  date?: string;
 
   @property({
     type: 'string',
   })
-  code?: string;
+  type?: string;
 
   @property({
     type: 'string',
   })
-  orderId?: string;
+  description?: string;
+
+  @property({
+    type: 'string',
+  })
+  status?: string;
+
+  @belongsTo(() => ArUser)
+  arUserId: string;
   // Define well-known properties here
 
   // Indexer property to allow additional data
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [prop: string]: any;
 
-  constructor(data?: Partial<Currency>) {
+  constructor(data?: Partial<Rdv>) {
     super(data);
   }
 }
 
-export interface CurrencyRelations {
+export interface RdvRelations {
   // describe navigational properties here
 }
 
-export type CurrencyWithRelations = Currency & CurrencyRelations;
+export type RdvWithRelations = Rdv & RdvRelations;

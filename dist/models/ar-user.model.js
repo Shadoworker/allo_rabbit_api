@@ -5,6 +5,7 @@ exports.ArUser = void 0;
 const tslib_1 = require("tslib");
 const repository_1 = require("@loopback/repository");
 const ar_user_credentials_model_1 = require("./ar-user-credentials.model");
+const roles_model_1 = require("./roles.model");
 // import {Language} from './language.model';
 let ArUser = class ArUser extends repository_1.Entity {
     constructor(data) {
@@ -93,6 +94,10 @@ tslib_1.__decorate([
     repository_1.hasOne(() => ar_user_credentials_model_1.ArUserCredentials),
     tslib_1.__metadata("design:type", ar_user_credentials_model_1.ArUserCredentials)
 ], ArUser.prototype, "arUserCredentials", void 0);
+tslib_1.__decorate([
+    repository_1.hasMany(() => roles_model_1.Roles),
+    tslib_1.__metadata("design:type", Array)
+], ArUser.prototype, "roles", void 0);
 ArUser = tslib_1.__decorate([
     repository_1.model({ settings: { strict: false } }),
     tslib_1.__metadata("design:paramtypes", [Object])

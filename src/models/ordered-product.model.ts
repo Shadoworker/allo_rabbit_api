@@ -1,4 +1,6 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {Order} from './order.model';
+import {Product} from './product.model';
 
 @model({settings: {strict: false}})
 export class OrderedProduct extends Entity {
@@ -19,6 +21,11 @@ export class OrderedProduct extends Entity {
   })
   updated_at?: string;
 
+  @belongsTo(() => Order)
+  orderId: string;
+
+  @belongsTo(() => Product)
+  productId: string;
   // Define well-known properties here
 
   // Indexer property to allow additional data

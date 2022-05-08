@@ -16,19 +16,14 @@
 
 
 import { User } from '@loopback/authentication-jwt';
-import { Entity, hasOne, model, property } from '@loopback/repository';
+import { Entity, hasOne, model, property, hasMany} from '@loopback/repository';
 import { ArUserCredentials } from './ar-user-credentials.model';
+import {Roles} from './roles.model';
+
 // import {Language} from './language.model';
 
 @model({ settings: { strict: false } })
 export class ArUser extends Entity {
-
-  // @property({
-  //   type: 'number',
-  //   id: true,
-  //   generated: false,
-  // })
-  // id: number;
 
   @property({
     type: 'string',
@@ -99,6 +94,8 @@ export class ArUser extends Entity {
   @hasOne(() => ArUserCredentials)
   arUserCredentials: ArUserCredentials;
 
+  @hasMany(() => Roles)
+  roles: Roles[];
   // @hasOne(() => Language)
   // language: Language;
   // Define well-known properties here

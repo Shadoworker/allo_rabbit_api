@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, belongsTo} from '@loopback/repository';
+import {Deliverer} from './deliverer.model';
 
 @model()
 export class DelivererValidationRequest extends Entity {
@@ -14,6 +15,8 @@ export class DelivererValidationRequest extends Entity {
   })
   status?: string;
 
+  @belongsTo(() => Deliverer)
+  delivererId: string;
 
   constructor(data?: Partial<DelivererValidationRequest>) {
     super(data);

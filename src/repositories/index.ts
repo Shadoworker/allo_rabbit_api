@@ -22,4 +22,5 @@ export * from './restaurant-category.repository';
 export * from './restaurant-validation-request.repository';
 export * from './restaurant.repository';
 export * from './roles.repository';
+export * from './rdv.repository';
 export * from './sos.repository';

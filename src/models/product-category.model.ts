@@ -1,6 +1,6 @@
 import { Entity, model, property } from '@loopback/repository';
 
-@model({ settings: { strict: false } })
+@model({settings: {strict: false}})
 export class ProductCategory extends Entity {
   @property({
     type: 'string',
@@ -25,6 +25,10 @@ export class ProductCategory extends Entity {
   })
   description?: string;
 
+  @property({
+    type: 'string',
+  })
+  productId?: string;
   // Define well-known properties here
 
   // Indexer property to allow additional data
