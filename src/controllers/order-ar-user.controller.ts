@@ -6,14 +6,20 @@ import {
   get,
   getModelSchemaRef,
 } from '@loopback/rest';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
+
 import {
   Order,
   ArUser,
 } from '../models';
-import {OrderRepository} from '../repositories';
+import { OrderRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
 
+@authenticate('jwt')
 export class OrderArUserController {
-  constructor(
+  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(OrderRepository)
     public orderRepository: OrderRepository,
   ) { }
@@ -24,7 +30,7 @@ export class OrderArUserController {
         description: 'ArUser belonging to Order',
         content: {
           'application/json': {
-            schema: {type: 'array', items: getModelSchemaRef(ArUser)},
+            schema: { type: 'array', items: getModelSchemaRef(ArUser) },
           },
         },
       },

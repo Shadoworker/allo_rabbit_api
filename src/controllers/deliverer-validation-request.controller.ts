@@ -17,19 +17,25 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {DelivererValidationRequest} from '../models';
-import {DelivererValidationRequestRepository} from '../repositories';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
 
+import { DelivererValidationRequest } from '../models';
+import { DelivererValidationRequestRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
+
+@authenticate('jwt')
 export class DelivererValidationRequestController {
-  constructor(
+  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(DelivererValidationRequestRepository)
-    public delivererValidationRequestRepository : DelivererValidationRequestRepository,
-  ) {}
+    public delivererValidationRequestRepository: DelivererValidationRequestRepository,
+  ) { }
 
   @post('/deliverer-validation-requests')
   @response(200, {
     description: 'DelivererValidationRequest model instance',
-    content: {'application/json': {schema: getModelSchemaRef(DelivererValidationRequest)}},
+    content: { 'application/json': { schema: getModelSchemaRef(DelivererValidationRequest) } },
   })
   async create(
     @requestBody({
@@ -50,7 +56,7 @@ export class DelivererValidationRequestController {
   @get('/deliverer-validation-requests/count')
   @response(200, {
     description: 'DelivererValidationRequest model count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
     @param.where(DelivererValidationRequest) where?: Where<DelivererValidationRequest>,
@@ -65,7 +71,7 @@ export class DelivererValidationRequestController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(DelivererValidationRequest, {includeRelations: true}),
+          items: getModelSchemaRef(DelivererValidationRequest, { includeRelations: true }),
         },
       },
     },
@@ -79,13 +85,13 @@ export class DelivererValidationRequestController {
   @patch('/deliverer-validation-requests')
   @response(200, {
     description: 'DelivererValidationRequest PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(DelivererValidationRequest, {partial: true}),
+          schema: getModelSchemaRef(DelivererValidationRequest, { partial: true }),
         },
       },
     })
@@ -100,13 +106,13 @@ export class DelivererValidationRequestController {
     description: 'DelivererValidationRequest model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(DelivererValidationRequest, {includeRelations: true}),
+        schema: getModelSchemaRef(DelivererValidationRequest, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(DelivererValidationRequest, {exclude: 'where'}) filter?: FilterExcludingWhere<DelivererValidationRequest>
+    @param.filter(DelivererValidationRequest, { exclude: 'where' }) filter?: FilterExcludingWhere<DelivererValidationRequest>
   ): Promise<DelivererValidationRequest> {
     return this.delivererValidationRequestRepository.findById(id, filter);
   }
@@ -120,7 +126,7 @@ export class DelivererValidationRequestController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(DelivererValidationRequest, {partial: true}),
+          schema: getModelSchemaRef(DelivererValidationRequest, { partial: true }),
         },
       },
     })

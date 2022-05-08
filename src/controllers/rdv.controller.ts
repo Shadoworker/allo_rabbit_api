@@ -17,19 +17,25 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {Rdv} from '../models';
-import {RdvRepository} from '../repositories';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
 
+import { Rdv } from '../models';
+import { RdvRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
+
+@authenticate('jwt')
 export class RdvController {
-  constructor(
+  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(RdvRepository)
-    public rdvRepository : RdvRepository,
-  ) {}
+    public rdvRepository: RdvRepository,
+  ) { }
 
   @post('/rdvs')
   @response(200, {
     description: 'Rdv model instance',
-    content: {'application/json': {schema: getModelSchemaRef(Rdv)}},
+    content: { 'application/json': { schema: getModelSchemaRef(Rdv) } },
   })
   async create(
     @requestBody({
@@ -50,7 +56,7 @@ export class RdvController {
   @get('/rdvs/count')
   @response(200, {
     description: 'Rdv model count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
     @param.where(Rdv) where?: Where<Rdv>,
@@ -65,7 +71,7 @@ export class RdvController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(Rdv, {includeRelations: true}),
+          items: getModelSchemaRef(Rdv, { includeRelations: true }),
         },
       },
     },
@@ -79,13 +85,13 @@ export class RdvController {
   @patch('/rdvs')
   @response(200, {
     description: 'Rdv PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Rdv, {partial: true}),
+          schema: getModelSchemaRef(Rdv, { partial: true }),
         },
       },
     })
@@ -100,13 +106,13 @@ export class RdvController {
     description: 'Rdv model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(Rdv, {includeRelations: true}),
+        schema: getModelSchemaRef(Rdv, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(Rdv, {exclude: 'where'}) filter?: FilterExcludingWhere<Rdv>
+    @param.filter(Rdv, { exclude: 'where' }) filter?: FilterExcludingWhere<Rdv>
   ): Promise<Rdv> {
     return this.rdvRepository.findById(id, filter);
   }
@@ -120,7 +126,7 @@ export class RdvController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Rdv, {partial: true}),
+          schema: getModelSchemaRef(Rdv, { partial: true }),
         },
       },
     })

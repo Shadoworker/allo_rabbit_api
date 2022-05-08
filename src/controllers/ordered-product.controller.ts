@@ -17,19 +17,25 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {OrderedProduct} from '../models';
-import {OrderedProductRepository} from '../repositories';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
 
+import { OrderedProduct } from '../models';
+import { OrderedProductRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
+
+@authenticate('jwt')
 export class OrderedProductController {
-  constructor(
+  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(OrderedProductRepository)
-    public orderedProductRepository : OrderedProductRepository,
-  ) {}
+    public orderedProductRepository: OrderedProductRepository,
+  ) { }
 
   @post('/ordered-products')
   @response(200, {
     description: 'OrderedProduct model instance',
-    content: {'application/json': {schema: getModelSchemaRef(OrderedProduct)}},
+    content: { 'application/json': { schema: getModelSchemaRef(OrderedProduct) } },
   })
   async create(
     @requestBody({
@@ -50,7 +56,7 @@ export class OrderedProductController {
   @get('/ordered-products/count')
   @response(200, {
     description: 'OrderedProduct model count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
     @param.where(OrderedProduct) where?: Where<OrderedProduct>,
@@ -65,7 +71,7 @@ export class OrderedProductController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(OrderedProduct, {includeRelations: true}),
+          items: getModelSchemaRef(OrderedProduct, { includeRelations: true }),
         },
       },
     },
@@ -79,13 +85,13 @@ export class OrderedProductController {
   @patch('/ordered-products')
   @response(200, {
     description: 'OrderedProduct PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(OrderedProduct, {partial: true}),
+          schema: getModelSchemaRef(OrderedProduct, { partial: true }),
         },
       },
     })
@@ -100,13 +106,13 @@ export class OrderedProductController {
     description: 'OrderedProduct model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(OrderedProduct, {includeRelations: true}),
+        schema: getModelSchemaRef(OrderedProduct, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(OrderedProduct, {exclude: 'where'}) filter?: FilterExcludingWhere<OrderedProduct>
+    @param.filter(OrderedProduct, { exclude: 'where' }) filter?: FilterExcludingWhere<OrderedProduct>
   ): Promise<OrderedProduct> {
     return this.orderedProductRepository.findById(id, filter);
   }
@@ -120,7 +126,7 @@ export class OrderedProductController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(OrderedProduct, {partial: true}),
+          schema: getModelSchemaRef(OrderedProduct, { partial: true }),
         },
       },
     })

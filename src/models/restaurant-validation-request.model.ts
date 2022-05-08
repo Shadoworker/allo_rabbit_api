@@ -1,12 +1,12 @@
-import {Entity, model, property, belongsTo} from '@loopback/repository';
-import {Restaurant} from './restaurant.model';
+import { Entity, model, property, belongsTo } from '@loopback/repository';
+import { Restaurant } from './restaurant.model';
 
-@model({settings: {strict: false}})
+@model({ settings: { strict: false } })
 export class RestaurantValidationRequest extends Entity {
   @property({
     type: 'string',
     id: true,
-    generated: true,
+    generated: false,
   })
   id?: string;
 

@@ -15,14 +15,20 @@ import {
   post,
   requestBody,
 } from '@loopback/rest';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
+
 import {
   Product,
   ProductCategory,
 } from '../models';
-import {ProductRepository} from '../repositories';
+import { ProductRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
 
+@authenticate('jwt')
 export class ProductProductCategoryController {
-  constructor(
+  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(ProductRepository) protected productRepository: ProductRepository,
   ) { }
 
@@ -49,7 +55,7 @@ export class ProductProductCategoryController {
     responses: {
       '200': {
         description: 'Product model instance',
-        content: {'application/json': {schema: getModelSchemaRef(ProductCategory)}},
+        content: { 'application/json': { schema: getModelSchemaRef(ProductCategory) } },
       },
     },
   })
@@ -74,7 +80,7 @@ export class ProductProductCategoryController {
     responses: {
       '200': {
         description: 'Product.ProductCategory PATCH success count',
-        content: {'application/json': {schema: CountSchema}},
+        content: { 'application/json': { schema: CountSchema } },
       },
     },
   })
@@ -83,7 +89,7 @@ export class ProductProductCategoryController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(ProductCategory, {partial: true}),
+          schema: getModelSchemaRef(ProductCategory, { partial: true }),
         },
       },
     })
@@ -97,7 +103,7 @@ export class ProductProductCategoryController {
     responses: {
       '200': {
         description: 'Product.ProductCategory DELETE success count',
-        content: {'application/json': {schema: CountSchema}},
+        content: { 'application/json': { schema: CountSchema } },
       },
     },
   })

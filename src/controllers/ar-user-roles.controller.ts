@@ -15,14 +15,20 @@ import {
   post,
   requestBody,
 } from '@loopback/rest';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
+
 import {
   ArUser,
   Roles,
 } from '../models';
-import {ArUserRepository} from '../repositories';
+import { ArUserRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
 
 export class ArUserRolesController {
   constructor(
+    // @inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(ArUserRepository) protected arUserRepository: ArUserRepository,
   ) { }
 
@@ -32,7 +38,7 @@ export class ArUserRolesController {
         description: 'Array of ArUser has many Roles',
         content: {
           'application/json': {
-            schema: {type: 'array', items: getModelSchemaRef(Roles)},
+            schema: { type: 'array', items: getModelSchemaRef(Roles) },
           },
         },
       },
@@ -49,7 +55,7 @@ export class ArUserRolesController {
     responses: {
       '200': {
         description: 'ArUser model instance',
-        content: {'application/json': {schema: getModelSchemaRef(Roles)}},
+        content: { 'application/json': { schema: getModelSchemaRef(Roles) } },
       },
     },
   })
@@ -74,7 +80,7 @@ export class ArUserRolesController {
     responses: {
       '200': {
         description: 'ArUser.Roles PATCH success count',
-        content: {'application/json': {schema: CountSchema}},
+        content: { 'application/json': { schema: CountSchema } },
       },
     },
   })
@@ -83,7 +89,7 @@ export class ArUserRolesController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Roles, {partial: true}),
+          schema: getModelSchemaRef(Roles, { partial: true }),
         },
       },
     })
@@ -97,7 +103,7 @@ export class ArUserRolesController {
     responses: {
       '200': {
         description: 'ArUser.Roles DELETE success count',
-        content: {'application/json': {schema: CountSchema}},
+        content: { 'application/json': { schema: CountSchema } },
       },
     },
   })

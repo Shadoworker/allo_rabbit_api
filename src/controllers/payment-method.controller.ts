@@ -17,19 +17,25 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {PaymentMethod} from '../models';
-import {PaymentMethodRepository} from '../repositories';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
 
+import { PaymentMethod } from '../models';
+import { PaymentMethodRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
+
+@authenticate('jwt')
 export class PaymentMethodController {
-  constructor(
+  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(PaymentMethodRepository)
-    public paymentMethodRepository : PaymentMethodRepository,
-  ) {}
+    public paymentMethodRepository: PaymentMethodRepository,
+  ) { }
 
   @post('/payment-methods')
   @response(200, {
     description: 'PaymentMethod model instance',
-    content: {'application/json': {schema: getModelSchemaRef(PaymentMethod)}},
+    content: { 'application/json': { schema: getModelSchemaRef(PaymentMethod) } },
   })
   async create(
     @requestBody({
@@ -50,7 +56,7 @@ export class PaymentMethodController {
   @get('/payment-methods/count')
   @response(200, {
     description: 'PaymentMethod model count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
     @param.where(PaymentMethod) where?: Where<PaymentMethod>,
@@ -65,7 +71,7 @@ export class PaymentMethodController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(PaymentMethod, {includeRelations: true}),
+          items: getModelSchemaRef(PaymentMethod, { includeRelations: true }),
         },
       },
     },
@@ -79,13 +85,13 @@ export class PaymentMethodController {
   @patch('/payment-methods')
   @response(200, {
     description: 'PaymentMethod PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(PaymentMethod, {partial: true}),
+          schema: getModelSchemaRef(PaymentMethod, { partial: true }),
         },
       },
     })
@@ -100,13 +106,13 @@ export class PaymentMethodController {
     description: 'PaymentMethod model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(PaymentMethod, {includeRelations: true}),
+        schema: getModelSchemaRef(PaymentMethod, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(PaymentMethod, {exclude: 'where'}) filter?: FilterExcludingWhere<PaymentMethod>
+    @param.filter(PaymentMethod, { exclude: 'where' }) filter?: FilterExcludingWhere<PaymentMethod>
   ): Promise<PaymentMethod> {
     return this.paymentMethodRepository.findById(id, filter);
   }
@@ -120,7 +126,7 @@ export class PaymentMethodController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(PaymentMethod, {partial: true}),
+          schema: getModelSchemaRef(PaymentMethod, { partial: true }),
         },
       },
     })

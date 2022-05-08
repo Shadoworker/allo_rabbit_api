@@ -6,14 +6,20 @@ import {
   get,
   getModelSchemaRef,
 } from '@loopback/rest';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
+
 import {
   Restaurant,
   ArUser,
 } from '../models';
-import {RestaurantRepository} from '../repositories';
+import { RestaurantRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
 
+@authenticate('jwt')
 export class RestaurantArUserController {
-  constructor(
+  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(RestaurantRepository)
     public restaurantRepository: RestaurantRepository,
   ) { }
@@ -24,7 +30,7 @@ export class RestaurantArUserController {
         description: 'ArUser belonging to Restaurant',
         content: {
           'application/json': {
-            schema: {type: 'array', items: getModelSchemaRef(ArUser)},
+            schema: { type: 'array', items: getModelSchemaRef(ArUser) },
           },
         },
       },

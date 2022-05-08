@@ -1,14 +1,14 @@
 import { Entity, model, property, belongsTo, hasOne } from '@loopback/repository';
 import { ArUser } from './ar-user.model';
-import {Restaurant} from './restaurant.model';
-import {Currency} from './currency.model';
+import { Restaurant } from './restaurant.model';
+import { Currency } from './currency.model';
 
-@model({settings: {strict: false}})
+@model({ settings: { strict: false } })
 export class Order extends Entity {
   @property({
     type: 'string',
     id: true,
-    generated: true,
+    generated: false,
   })
   id?: string;
 

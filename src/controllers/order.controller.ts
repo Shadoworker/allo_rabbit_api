@@ -17,19 +17,25 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {Order} from '../models';
-import {OrderRepository} from '../repositories';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
 
+import { Order } from '../models';
+import { OrderRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
+
+@authenticate('jwt')
 export class OrderController {
-  constructor(
+  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(OrderRepository)
-    public orderRepository : OrderRepository,
-  ) {}
+    public orderRepository: OrderRepository,
+  ) { }
 
   @post('/orders')
   @response(200, {
     description: 'Order model instance',
-    content: {'application/json': {schema: getModelSchemaRef(Order)}},
+    content: { 'application/json': { schema: getModelSchemaRef(Order) } },
   })
   async create(
     @requestBody({
@@ -50,7 +56,7 @@ export class OrderController {
   @get('/orders/count')
   @response(200, {
     description: 'Order model count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
     @param.where(Order) where?: Where<Order>,
@@ -65,7 +71,7 @@ export class OrderController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(Order, {includeRelations: true}),
+          items: getModelSchemaRef(Order, { includeRelations: true }),
         },
       },
     },
@@ -79,13 +85,13 @@ export class OrderController {
   @patch('/orders')
   @response(200, {
     description: 'Order PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Order, {partial: true}),
+          schema: getModelSchemaRef(Order, { partial: true }),
         },
       },
     })
@@ -100,13 +106,13 @@ export class OrderController {
     description: 'Order model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(Order, {includeRelations: true}),
+        schema: getModelSchemaRef(Order, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(Order, {exclude: 'where'}) filter?: FilterExcludingWhere<Order>
+    @param.filter(Order, { exclude: 'where' }) filter?: FilterExcludingWhere<Order>
   ): Promise<Order> {
     return this.orderRepository.findById(id, filter);
   }
@@ -120,7 +126,7 @@ export class OrderController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Order, {partial: true}),
+          schema: getModelSchemaRef(Order, { partial: true }),
         },
       },
     })

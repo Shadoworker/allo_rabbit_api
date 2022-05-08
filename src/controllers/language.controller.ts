@@ -17,19 +17,26 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {Language} from '../models';
-import {LanguageRepository} from '../repositories';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
 
+import { Language } from '../models';
+import { LanguageRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
+
+// @authenticate('jwt')
 export class LanguageController {
   constructor(
+    // @inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(LanguageRepository)
-    public languageRepository : LanguageRepository,
-  ) {}
+    public languageRepository: LanguageRepository,
+  ) { }
 
   @post('/languages')
   @response(200, {
     description: 'Language model instance',
-    content: {'application/json': {schema: getModelSchemaRef(Language)}},
+    content: { 'application/json': { schema: getModelSchemaRef(Language) } },
   })
   async create(
     @requestBody({
@@ -50,7 +57,7 @@ export class LanguageController {
   @get('/languages/count')
   @response(200, {
     description: 'Language model count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
     @param.where(Language) where?: Where<Language>,
@@ -65,7 +72,7 @@ export class LanguageController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(Language, {includeRelations: true}),
+          items: getModelSchemaRef(Language, { includeRelations: true }),
         },
       },
     },
@@ -79,13 +86,13 @@ export class LanguageController {
   @patch('/languages')
   @response(200, {
     description: 'Language PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Language, {partial: true}),
+          schema: getModelSchemaRef(Language, { partial: true }),
         },
       },
     })
@@ -100,13 +107,13 @@ export class LanguageController {
     description: 'Language model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(Language, {includeRelations: true}),
+        schema: getModelSchemaRef(Language, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(Language, {exclude: 'where'}) filter?: FilterExcludingWhere<Language>
+    @param.filter(Language, { exclude: 'where' }) filter?: FilterExcludingWhere<Language>
   ): Promise<Language> {
     return this.languageRepository.findById(id, filter);
   }
@@ -120,7 +127,7 @@ export class LanguageController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Language, {partial: true}),
+          schema: getModelSchemaRef(Language, { partial: true }),
         },
       },
     })

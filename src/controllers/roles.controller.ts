@@ -17,11 +17,17 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
+
 import { Roles } from '../models';
 import { RolesRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
 
+// @authenticate('jwt')
 export class RolesController {
-  constructor(
+  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(RolesRepository)
     public rolesRepository: RolesRepository,
   ) { }

@@ -6,14 +6,20 @@ import {
   get,
   getModelSchemaRef,
 } from '@loopback/rest';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
+
 import {
   ProductValidationRequest,
   Product,
 } from '../models';
-import {ProductValidationRequestRepository} from '../repositories';
+import { ProductValidationRequestRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
 
+@authenticate('jwt')
 export class ProductValidationRequestProductController {
-  constructor(
+  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(ProductValidationRequestRepository)
     public productValidationRequestRepository: ProductValidationRequestRepository,
   ) { }
@@ -24,7 +30,7 @@ export class ProductValidationRequestProductController {
         description: 'Product belonging to ProductValidationRequest',
         content: {
           'application/json': {
-            schema: {type: 'array', items: getModelSchemaRef(Product)},
+            schema: { type: 'array', items: getModelSchemaRef(Product) },
           },
         },
       },

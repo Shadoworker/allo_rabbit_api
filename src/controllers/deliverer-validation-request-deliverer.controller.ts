@@ -6,14 +6,20 @@ import {
   get,
   getModelSchemaRef,
 } from '@loopback/rest';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
+
 import {
   DelivererValidationRequest,
   Deliverer,
 } from '../models';
-import {DelivererValidationRequestRepository} from '../repositories';
+import { DelivererValidationRequestRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
 
+@authenticate('jwt')
 export class DelivererValidationRequestDelivererController {
-  constructor(
+  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(DelivererValidationRequestRepository)
     public delivererValidationRequestRepository: DelivererValidationRequestRepository,
   ) { }
@@ -24,7 +30,7 @@ export class DelivererValidationRequestDelivererController {
         description: 'Deliverer belonging to DelivererValidationRequest',
         content: {
           'application/json': {
-            schema: {type: 'array', items: getModelSchemaRef(Deliverer)},
+            schema: { type: 'array', items: getModelSchemaRef(Deliverer) },
           },
         },
       },

@@ -17,19 +17,25 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {ProductValidationRequest} from '../models';
-import {ProductValidationRequestRepository} from '../repositories';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
 
+import { ProductValidationRequest } from '../models';
+import { ProductValidationRequestRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
+
+@authenticate('jwt')
 export class ProductValidationRequestController {
-  constructor(
+  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(ProductValidationRequestRepository)
-    public productValidationRequestRepository : ProductValidationRequestRepository,
-  ) {}
+    public productValidationRequestRepository: ProductValidationRequestRepository,
+  ) { }
 
   @post('/product-validation-requests')
   @response(200, {
     description: 'ProductValidationRequest model instance',
-    content: {'application/json': {schema: getModelSchemaRef(ProductValidationRequest)}},
+    content: { 'application/json': { schema: getModelSchemaRef(ProductValidationRequest) } },
   })
   async create(
     @requestBody({
@@ -50,7 +56,7 @@ export class ProductValidationRequestController {
   @get('/product-validation-requests/count')
   @response(200, {
     description: 'ProductValidationRequest model count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
     @param.where(ProductValidationRequest) where?: Where<ProductValidationRequest>,
@@ -65,7 +71,7 @@ export class ProductValidationRequestController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(ProductValidationRequest, {includeRelations: true}),
+          items: getModelSchemaRef(ProductValidationRequest, { includeRelations: true }),
         },
       },
     },
@@ -79,13 +85,13 @@ export class ProductValidationRequestController {
   @patch('/product-validation-requests')
   @response(200, {
     description: 'ProductValidationRequest PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(ProductValidationRequest, {partial: true}),
+          schema: getModelSchemaRef(ProductValidationRequest, { partial: true }),
         },
       },
     })
@@ -100,13 +106,13 @@ export class ProductValidationRequestController {
     description: 'ProductValidationRequest model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(ProductValidationRequest, {includeRelations: true}),
+        schema: getModelSchemaRef(ProductValidationRequest, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(ProductValidationRequest, {exclude: 'where'}) filter?: FilterExcludingWhere<ProductValidationRequest>
+    @param.filter(ProductValidationRequest, { exclude: 'where' }) filter?: FilterExcludingWhere<ProductValidationRequest>
   ): Promise<ProductValidationRequest> {
     return this.productValidationRequestRepository.findById(id, filter);
   }
@@ -120,7 +126,7 @@ export class ProductValidationRequestController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(ProductValidationRequest, {partial: true}),
+          schema: getModelSchemaRef(ProductValidationRequest, { partial: true }),
         },
       },
     })

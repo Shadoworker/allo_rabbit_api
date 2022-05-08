@@ -10,19 +10,26 @@ import {
   get,
   getModelSchemaRef,
   getWhereSchemaFor,
+  OperationVisibility,
   param,
   patch,
   post,
   requestBody,
 } from '@loopback/rest';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
+
 import {
   ArUser,
   ArUserCredentials,
 } from '../models';
-import {ArUserRepository} from '../repositories';
+import { ArUserRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
 
 export class ArUserArUserCredentialsController {
   constructor(
+    // @inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(ArUserRepository) protected arUserRepository: ArUserRepository,
   ) { }
 
@@ -49,7 +56,7 @@ export class ArUserArUserCredentialsController {
     responses: {
       '200': {
         description: 'ArUser model instance',
-        content: {'application/json': {schema: getModelSchemaRef(ArUserCredentials)}},
+        content: { 'application/json': { schema: getModelSchemaRef(ArUserCredentials) } },
       },
     },
   })
@@ -74,7 +81,7 @@ export class ArUserArUserCredentialsController {
     responses: {
       '200': {
         description: 'ArUser.ArUserCredentials PATCH success count',
-        content: {'application/json': {schema: CountSchema}},
+        content: { 'application/json': { schema: CountSchema } },
       },
     },
   })
@@ -83,7 +90,7 @@ export class ArUserArUserCredentialsController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(ArUserCredentials, {partial: true}),
+          schema: getModelSchemaRef(ArUserCredentials, { partial: true }),
         },
       },
     })
@@ -97,7 +104,7 @@ export class ArUserArUserCredentialsController {
     responses: {
       '200': {
         description: 'ArUser.ArUserCredentials DELETE success count',
-        content: {'application/json': {schema: CountSchema}},
+        content: { 'application/json': { schema: CountSchema } },
       },
     },
   })

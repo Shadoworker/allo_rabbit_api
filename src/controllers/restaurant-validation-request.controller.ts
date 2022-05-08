@@ -17,19 +17,25 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {RestaurantValidationRequest} from '../models';
-import {RestaurantValidationRequestRepository} from '../repositories';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
 
+import { RestaurantValidationRequest } from '../models';
+import { RestaurantValidationRequestRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
+
+@authenticate('jwt')
 export class RestaurantValidationRequestController {
-  constructor(
+  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(RestaurantValidationRequestRepository)
-    public restaurantValidationRequestRepository : RestaurantValidationRequestRepository,
-  ) {}
+    public restaurantValidationRequestRepository: RestaurantValidationRequestRepository,
+  ) { }
 
   @post('/restaurant-validation-requests')
   @response(200, {
     description: 'RestaurantValidationRequest model instance',
-    content: {'application/json': {schema: getModelSchemaRef(RestaurantValidationRequest)}},
+    content: { 'application/json': { schema: getModelSchemaRef(RestaurantValidationRequest) } },
   })
   async create(
     @requestBody({
@@ -50,7 +56,7 @@ export class RestaurantValidationRequestController {
   @get('/restaurant-validation-requests/count')
   @response(200, {
     description: 'RestaurantValidationRequest model count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
     @param.where(RestaurantValidationRequest) where?: Where<RestaurantValidationRequest>,
@@ -65,7 +71,7 @@ export class RestaurantValidationRequestController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(RestaurantValidationRequest, {includeRelations: true}),
+          items: getModelSchemaRef(RestaurantValidationRequest, { includeRelations: true }),
         },
       },
     },
@@ -79,13 +85,13 @@ export class RestaurantValidationRequestController {
   @patch('/restaurant-validation-requests')
   @response(200, {
     description: 'RestaurantValidationRequest PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(RestaurantValidationRequest, {partial: true}),
+          schema: getModelSchemaRef(RestaurantValidationRequest, { partial: true }),
         },
       },
     })
@@ -100,13 +106,13 @@ export class RestaurantValidationRequestController {
     description: 'RestaurantValidationRequest model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(RestaurantValidationRequest, {includeRelations: true}),
+        schema: getModelSchemaRef(RestaurantValidationRequest, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(RestaurantValidationRequest, {exclude: 'where'}) filter?: FilterExcludingWhere<RestaurantValidationRequest>
+    @param.filter(RestaurantValidationRequest, { exclude: 'where' }) filter?: FilterExcludingWhere<RestaurantValidationRequest>
   ): Promise<RestaurantValidationRequest> {
     return this.restaurantValidationRequestRepository.findById(id, filter);
   }
@@ -120,7 +126,7 @@ export class RestaurantValidationRequestController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(RestaurantValidationRequest, {partial: true}),
+          schema: getModelSchemaRef(RestaurantValidationRequest, { partial: true }),
         },
       },
     })

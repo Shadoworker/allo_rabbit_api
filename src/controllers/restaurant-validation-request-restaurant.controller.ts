@@ -6,14 +6,20 @@ import {
   get,
   getModelSchemaRef,
 } from '@loopback/rest';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
+
 import {
   RestaurantValidationRequest,
   Restaurant,
 } from '../models';
-import {RestaurantValidationRequestRepository} from '../repositories';
+import { RestaurantValidationRequestRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
 
+@authenticate('jwt')
 export class RestaurantValidationRequestRestaurantController {
-  constructor(
+  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(RestaurantValidationRequestRepository)
     public restaurantValidationRequestRepository: RestaurantValidationRequestRepository,
   ) { }
@@ -24,7 +30,7 @@ export class RestaurantValidationRequestRestaurantController {
         description: 'Restaurant belonging to RestaurantValidationRequest',
         content: {
           'application/json': {
-            schema: {type: 'array', items: getModelSchemaRef(Restaurant)},
+            schema: { type: 'array', items: getModelSchemaRef(Restaurant) },
           },
         },
       },

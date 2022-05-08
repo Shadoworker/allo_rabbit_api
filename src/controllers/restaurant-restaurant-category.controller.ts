@@ -15,14 +15,20 @@ import {
   post,
   requestBody,
 } from '@loopback/rest';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
+
 import {
   Restaurant,
   RestaurantCategory,
 } from '../models';
-import {RestaurantRepository} from '../repositories';
+import { RestaurantRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
 
+@authenticate('jwt')
 export class RestaurantRestaurantCategoryController {
-  constructor(
+  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(RestaurantRepository) protected restaurantRepository: RestaurantRepository,
   ) { }
 
@@ -49,7 +55,7 @@ export class RestaurantRestaurantCategoryController {
     responses: {
       '200': {
         description: 'Restaurant model instance',
-        content: {'application/json': {schema: getModelSchemaRef(RestaurantCategory)}},
+        content: { 'application/json': { schema: getModelSchemaRef(RestaurantCategory) } },
       },
     },
   })
@@ -74,7 +80,7 @@ export class RestaurantRestaurantCategoryController {
     responses: {
       '200': {
         description: 'Restaurant.RestaurantCategory PATCH success count',
-        content: {'application/json': {schema: CountSchema}},
+        content: { 'application/json': { schema: CountSchema } },
       },
     },
   })
@@ -83,7 +89,7 @@ export class RestaurantRestaurantCategoryController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(RestaurantCategory, {partial: true}),
+          schema: getModelSchemaRef(RestaurantCategory, { partial: true }),
         },
       },
     })
@@ -97,7 +103,7 @@ export class RestaurantRestaurantCategoryController {
     responses: {
       '200': {
         description: 'Restaurant.RestaurantCategory DELETE success count',
-        content: {'application/json': {schema: CountSchema}},
+        content: { 'application/json': { schema: CountSchema } },
       },
     },
   })

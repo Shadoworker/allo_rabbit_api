@@ -17,19 +17,26 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {Country} from '../models';
-import {CountryRepository} from '../repositories';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
 
+import { Country } from '../models';
+import { CountryRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
+
+// @authenticate('jwt')
 export class CountryController {
   constructor(
+    // @inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(CountryRepository)
-    public countryRepository : CountryRepository,
-  ) {}
+    public countryRepository: CountryRepository,
+  ) { }
 
   @post('/countries')
   @response(200, {
     description: 'Country model instance',
-    content: {'application/json': {schema: getModelSchemaRef(Country)}},
+    content: { 'application/json': { schema: getModelSchemaRef(Country) } },
   })
   async create(
     @requestBody({
@@ -50,7 +57,7 @@ export class CountryController {
   @get('/countries/count')
   @response(200, {
     description: 'Country model count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
     @param.where(Country) where?: Where<Country>,
@@ -65,7 +72,7 @@ export class CountryController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(Country, {includeRelations: true}),
+          items: getModelSchemaRef(Country, { includeRelations: true }),
         },
       },
     },
@@ -79,13 +86,13 @@ export class CountryController {
   @patch('/countries')
   @response(200, {
     description: 'Country PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Country, {partial: true}),
+          schema: getModelSchemaRef(Country, { partial: true }),
         },
       },
     })
@@ -100,13 +107,13 @@ export class CountryController {
     description: 'Country model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(Country, {includeRelations: true}),
+        schema: getModelSchemaRef(Country, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(Country, {exclude: 'where'}) filter?: FilterExcludingWhere<Country>
+    @param.filter(Country, { exclude: 'where' }) filter?: FilterExcludingWhere<Country>
   ): Promise<Country> {
     return this.countryRepository.findById(id, filter);
   }
@@ -120,7 +127,7 @@ export class CountryController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Country, {partial: true}),
+          schema: getModelSchemaRef(Country, { partial: true }),
         },
       },
     })

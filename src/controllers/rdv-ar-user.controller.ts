@@ -6,14 +6,20 @@ import {
   get,
   getModelSchemaRef,
 } from '@loopback/rest';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
+
 import {
   Rdv,
   ArUser,
 } from '../models';
-import {RdvRepository} from '../repositories';
+import { RdvRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
 
+@authenticate('jwt')
 export class RdvArUserController {
-  constructor(
+  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(RdvRepository)
     public rdvRepository: RdvRepository,
   ) { }
@@ -24,7 +30,7 @@ export class RdvArUserController {
         description: 'ArUser belonging to Rdv',
         content: {
           'application/json': {
-            schema: {type: 'array', items: getModelSchemaRef(ArUser)},
+            schema: { type: 'array', items: getModelSchemaRef(ArUser) },
           },
         },
       },

@@ -17,19 +17,25 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {ProductCategory} from '../models';
-import {ProductCategoryRepository} from '../repositories';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
 
+import { ProductCategory } from '../models';
+import { ProductCategoryRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
+
+@authenticate('jwt')
 export class ProductCategoryController {
-  constructor(
+  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(ProductCategoryRepository)
-    public productCategoryRepository : ProductCategoryRepository,
-  ) {}
+    public productCategoryRepository: ProductCategoryRepository,
+  ) { }
 
   @post('/product-categories')
   @response(200, {
     description: 'ProductCategory model instance',
-    content: {'application/json': {schema: getModelSchemaRef(ProductCategory)}},
+    content: { 'application/json': { schema: getModelSchemaRef(ProductCategory) } },
   })
   async create(
     @requestBody({
@@ -50,7 +56,7 @@ export class ProductCategoryController {
   @get('/product-categories/count')
   @response(200, {
     description: 'ProductCategory model count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
     @param.where(ProductCategory) where?: Where<ProductCategory>,
@@ -65,7 +71,7 @@ export class ProductCategoryController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(ProductCategory, {includeRelations: true}),
+          items: getModelSchemaRef(ProductCategory, { includeRelations: true }),
         },
       },
     },
@@ -79,13 +85,13 @@ export class ProductCategoryController {
   @patch('/product-categories')
   @response(200, {
     description: 'ProductCategory PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(ProductCategory, {partial: true}),
+          schema: getModelSchemaRef(ProductCategory, { partial: true }),
         },
       },
     })
@@ -100,13 +106,13 @@ export class ProductCategoryController {
     description: 'ProductCategory model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(ProductCategory, {includeRelations: true}),
+        schema: getModelSchemaRef(ProductCategory, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(ProductCategory, {exclude: 'where'}) filter?: FilterExcludingWhere<ProductCategory>
+    @param.filter(ProductCategory, { exclude: 'where' }) filter?: FilterExcludingWhere<ProductCategory>
   ): Promise<ProductCategory> {
     return this.productCategoryRepository.findById(id, filter);
   }
@@ -120,7 +126,7 @@ export class ProductCategoryController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(ProductCategory, {partial: true}),
+          schema: getModelSchemaRef(ProductCategory, { partial: true }),
         },
       },
     })

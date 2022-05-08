@@ -45,7 +45,7 @@ let UserController = class UserController {
         this.userRepository = userRepository;
     }
     async login(credentials) {
-        console.log(credentials);
+        // console.log(credentials)
         // ensure the user exists, and the password is correct
         const user = await this.userService.verifyCredentials(credentials);
         // convert a User object into a UserProfile object (reduced set of properties)
@@ -61,7 +61,7 @@ let UserController = class UserController {
     async signUp(newUserRequest) {
         const password = await bcryptjs_1.hash(newUserRequest.password, await bcryptjs_1.genSalt());
         const savedUser = await this.userRepository.create(lodash_1.default.omit(newUserRequest, 'password'));
-        console.log(savedUser);
+        // console.log(savedUser);
         await this.userRepository.arUserCredentials(savedUser.id).create({ password });
         return savedUser;
     }

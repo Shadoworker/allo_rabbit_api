@@ -1,12 +1,12 @@
-import {Entity, model, property, belongsTo} from '@loopback/repository';
-import {ArUser} from './ar-user.model';
+import { Entity, model, property, belongsTo } from '@loopback/repository';
+import { ArUser } from './ar-user.model';
 
-@model({settings: {strict: false}})
+@model({ settings: { strict: false } })
 export class Deliverer extends Entity {
   @property({
     type: 'string',
     id: true,
-    generated: true,
+    generated: false,
   })
   id?: string;
 

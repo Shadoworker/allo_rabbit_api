@@ -17,19 +17,25 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {Restaurant} from '../models';
-import {RestaurantRepository} from '../repositories';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
 
+import { Restaurant } from '../models';
+import { RestaurantRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
+
+@authenticate('jwt')
 export class RestaurantController {
-  constructor(
+  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(RestaurantRepository)
-    public restaurantRepository : RestaurantRepository,
-  ) {}
+    public restaurantRepository: RestaurantRepository,
+  ) { }
 
   @post('/restaurants')
   @response(200, {
     description: 'Restaurant model instance',
-    content: {'application/json': {schema: getModelSchemaRef(Restaurant)}},
+    content: { 'application/json': { schema: getModelSchemaRef(Restaurant) } },
   })
   async create(
     @requestBody({
@@ -50,7 +56,7 @@ export class RestaurantController {
   @get('/restaurants/count')
   @response(200, {
     description: 'Restaurant model count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
     @param.where(Restaurant) where?: Where<Restaurant>,
@@ -65,7 +71,7 @@ export class RestaurantController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(Restaurant, {includeRelations: true}),
+          items: getModelSchemaRef(Restaurant, { includeRelations: true }),
         },
       },
     },
@@ -79,13 +85,13 @@ export class RestaurantController {
   @patch('/restaurants')
   @response(200, {
     description: 'Restaurant PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Restaurant, {partial: true}),
+          schema: getModelSchemaRef(Restaurant, { partial: true }),
         },
       },
     })
@@ -100,13 +106,13 @@ export class RestaurantController {
     description: 'Restaurant model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(Restaurant, {includeRelations: true}),
+        schema: getModelSchemaRef(Restaurant, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(Restaurant, {exclude: 'where'}) filter?: FilterExcludingWhere<Restaurant>
+    @param.filter(Restaurant, { exclude: 'where' }) filter?: FilterExcludingWhere<Restaurant>
   ): Promise<Restaurant> {
     return this.restaurantRepository.findById(id, filter);
   }
@@ -120,7 +126,7 @@ export class RestaurantController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Restaurant, {partial: true}),
+          schema: getModelSchemaRef(Restaurant, { partial: true }),
         },
       },
     })

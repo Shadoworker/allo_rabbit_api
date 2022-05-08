@@ -17,19 +17,25 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {Sos} from '../models';
-import {SosRepository} from '../repositories';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
 
+import { Sos } from '../models';
+import { SosRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
+
+@authenticate('jwt')
 export class SosController {
-  constructor(
+  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(SosRepository)
-    public sosRepository : SosRepository,
-  ) {}
+    public sosRepository: SosRepository,
+  ) { }
 
   @post('/sos')
   @response(200, {
     description: 'Sos model instance',
-    content: {'application/json': {schema: getModelSchemaRef(Sos)}},
+    content: { 'application/json': { schema: getModelSchemaRef(Sos) } },
   })
   async create(
     @requestBody({
@@ -50,7 +56,7 @@ export class SosController {
   @get('/sos/count')
   @response(200, {
     description: 'Sos model count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
     @param.where(Sos) where?: Where<Sos>,
@@ -65,7 +71,7 @@ export class SosController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(Sos, {includeRelations: true}),
+          items: getModelSchemaRef(Sos, { includeRelations: true }),
         },
       },
     },
@@ -79,13 +85,13 @@ export class SosController {
   @patch('/sos')
   @response(200, {
     description: 'Sos PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Sos, {partial: true}),
+          schema: getModelSchemaRef(Sos, { partial: true }),
         },
       },
     })
@@ -100,13 +106,13 @@ export class SosController {
     description: 'Sos model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(Sos, {includeRelations: true}),
+        schema: getModelSchemaRef(Sos, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(Sos, {exclude: 'where'}) filter?: FilterExcludingWhere<Sos>
+    @param.filter(Sos, { exclude: 'where' }) filter?: FilterExcludingWhere<Sos>
   ): Promise<Sos> {
     return this.sosRepository.findById(id, filter);
   }
@@ -120,7 +126,7 @@ export class SosController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Sos, {partial: true}),
+          schema: getModelSchemaRef(Sos, { partial: true }),
         },
       },
     })

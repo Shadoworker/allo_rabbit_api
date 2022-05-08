@@ -17,19 +17,25 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {Deliverer} from '../models';
-import {DelivererRepository} from '../repositories';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
 
+import { Deliverer } from '../models';
+import { DelivererRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
+
+// @authenticate('jwt')
 export class DelivererController {
-  constructor(
+  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(DelivererRepository)
-    public delivererRepository : DelivererRepository,
-  ) {}
+    public delivererRepository: DelivererRepository,
+  ) { }
 
   @post('/deliverers')
   @response(200, {
     description: 'Deliverer model instance',
-    content: {'application/json': {schema: getModelSchemaRef(Deliverer)}},
+    content: { 'application/json': { schema: getModelSchemaRef(Deliverer) } },
   })
   async create(
     @requestBody({
@@ -50,7 +56,7 @@ export class DelivererController {
   @get('/deliverers/count')
   @response(200, {
     description: 'Deliverer model count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
     @param.where(Deliverer) where?: Where<Deliverer>,
@@ -65,7 +71,7 @@ export class DelivererController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(Deliverer, {includeRelations: true}),
+          items: getModelSchemaRef(Deliverer, { includeRelations: true }),
         },
       },
     },
@@ -79,13 +85,13 @@ export class DelivererController {
   @patch('/deliverers')
   @response(200, {
     description: 'Deliverer PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Deliverer, {partial: true}),
+          schema: getModelSchemaRef(Deliverer, { partial: true }),
         },
       },
     })
@@ -100,13 +106,13 @@ export class DelivererController {
     description: 'Deliverer model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(Deliverer, {includeRelations: true}),
+        schema: getModelSchemaRef(Deliverer, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(Deliverer, {exclude: 'where'}) filter?: FilterExcludingWhere<Deliverer>
+    @param.filter(Deliverer, { exclude: 'where' }) filter?: FilterExcludingWhere<Deliverer>
   ): Promise<Deliverer> {
     return this.delivererRepository.findById(id, filter);
   }
@@ -120,7 +126,7 @@ export class DelivererController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Deliverer, {partial: true}),
+          schema: getModelSchemaRef(Deliverer, { partial: true }),
         },
       },
     })

@@ -17,19 +17,26 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {Currency} from '../models';
-import {CurrencyRepository} from '../repositories';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
 
+import { Currency } from '../models';
+import { CurrencyRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
+
+// @authenticate('jwt')
 export class CurrencyController {
   constructor(
+    // @inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(CurrencyRepository)
-    public currencyRepository : CurrencyRepository,
-  ) {}
+    public currencyRepository: CurrencyRepository,
+  ) { }
 
   @post('/currencies')
   @response(200, {
     description: 'Currency model instance',
-    content: {'application/json': {schema: getModelSchemaRef(Currency)}},
+    content: { 'application/json': { schema: getModelSchemaRef(Currency) } },
   })
   async create(
     @requestBody({
@@ -50,7 +57,7 @@ export class CurrencyController {
   @get('/currencies/count')
   @response(200, {
     description: 'Currency model count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
     @param.where(Currency) where?: Where<Currency>,
@@ -65,7 +72,7 @@ export class CurrencyController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(Currency, {includeRelations: true}),
+          items: getModelSchemaRef(Currency, { includeRelations: true }),
         },
       },
     },
@@ -79,13 +86,13 @@ export class CurrencyController {
   @patch('/currencies')
   @response(200, {
     description: 'Currency PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Currency, {partial: true}),
+          schema: getModelSchemaRef(Currency, { partial: true }),
         },
       },
     })
@@ -100,13 +107,13 @@ export class CurrencyController {
     description: 'Currency model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(Currency, {includeRelations: true}),
+        schema: getModelSchemaRef(Currency, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(Currency, {exclude: 'where'}) filter?: FilterExcludingWhere<Currency>
+    @param.filter(Currency, { exclude: 'where' }) filter?: FilterExcludingWhere<Currency>
   ): Promise<Currency> {
     return this.currencyRepository.findById(id, filter);
   }
@@ -120,7 +127,7 @@ export class CurrencyController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Currency, {partial: true}),
+          schema: getModelSchemaRef(Currency, { partial: true }),
         },
       },
     })

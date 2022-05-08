@@ -6,14 +6,20 @@ import {
   get,
   getModelSchemaRef,
 } from '@loopback/rest';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
+
 import {
   Sos,
   Deliverer,
 } from '../models';
-import {SosRepository} from '../repositories';
+import { SosRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
 
+@authenticate('jwt')
 export class SosDelivererController {
-  constructor(
+  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(SosRepository)
     public sosRepository: SosRepository,
   ) { }
@@ -24,7 +30,7 @@ export class SosDelivererController {
         description: 'Deliverer belonging to Sos',
         content: {
           'application/json': {
-            schema: {type: 'array', items: getModelSchemaRef(Deliverer)},
+            schema: { type: 'array', items: getModelSchemaRef(Deliverer) },
           },
         },
       },

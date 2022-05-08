@@ -15,14 +15,20 @@ import {
   post,
   requestBody,
 } from '@loopback/rest';
+import { SecurityBindings, UserProfile } from '../loopauth/security/src';
+
 import {
   Order,
   Currency,
 } from '../models';
-import {OrderRepository} from '../repositories';
+import { OrderRepository } from '../repositories';
+import { authenticate } from '@loopback/authentication';
+import { inject } from '@loopback/core';
 
+@authenticate('jwt')
 export class OrderCurrencyController {
-  constructor(
+  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+
     @repository(OrderRepository) protected orderRepository: OrderRepository,
   ) { }
 
@@ -49,7 +55,7 @@ export class OrderCurrencyController {
     responses: {
       '200': {
         description: 'Order model instance',
-        content: {'application/json': {schema: getModelSchemaRef(Currency)}},
+        content: { 'application/json': { schema: getModelSchemaRef(Currency) } },
       },
     },
   })
@@ -74,7 +80,7 @@ export class OrderCurrencyController {
     responses: {
       '200': {
         description: 'Order.Currency PATCH success count',
-        content: {'application/json': {schema: CountSchema}},
+        content: { 'application/json': { schema: CountSchema } },
       },
     },
   })
@@ -83,7 +89,7 @@ export class OrderCurrencyController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Currency, {partial: true}),
+          schema: getModelSchemaRef(Currency, { partial: true }),
         },
       },
     })
@@ -97,7 +103,7 @@ export class OrderCurrencyController {
     responses: {
       '200': {
         description: 'Order.Currency DELETE success count',
-        content: {'application/json': {schema: CountSchema}},
+        content: { 'application/json': { schema: CountSchema } },
       },
     },
   })

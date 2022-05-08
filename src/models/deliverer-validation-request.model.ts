@@ -1,12 +1,12 @@
-import {Entity, model, property, belongsTo} from '@loopback/repository';
-import {Deliverer} from './deliverer.model';
+import { Entity, model, property, belongsTo } from '@loopback/repository';
+import { Deliverer } from './deliverer.model';
 
 @model()
 export class DelivererValidationRequest extends Entity {
   @property({
     type: 'string',
     id: true,
-    generated: true,
+    generated: false,
   })
   id?: string;
 

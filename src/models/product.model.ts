@@ -1,12 +1,12 @@
-import {Entity, model, property, hasOne} from '@loopback/repository';
-import {ProductCategory} from './product-category.model';
+import { Entity, model, property, hasOne } from '@loopback/repository';
+import { ProductCategory } from './product-category.model';
 
-@model({settings: {strict: false}})
+@model({ settings: { strict: false } })
 export class Product extends Entity {
   @property({
     type: 'string',
     id: true,
-    generated: true,
+    generated: false,
   })
   id?: string;
 
