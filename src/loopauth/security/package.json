@@ -1,0 +1,92 @@
+{
+  "_args": [
+    [
+      "@loopback/security@0.5.4",
+      "C:\\Users\\LENOVO\\Desktop\\GeneralWorks\\ExternalWorks\\Faseya\\AlloRabbitProject\\allorabbitapi2"
+    ]
+  ],
+  "_from": "@loopback/security@0.5.4",
+  "_id": "@loopback/security@0.5.4",
+  "_inBundle": false,
+  "_integrity": "sha512-9pgs790AtKCQPTNa+FYQZqHZpuF22XZKTPzK9C/WmUoClF5BGvjPbXwJVOMJPYmgjZIeB0dONWiq+QlIvdcSOw==",
+  "_location": "/@loopback/security",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "@loopback/security@0.5.4",
+    "name": "@loopback/security",
+    "escapedName": "@loopback%2fsecurity",
+    "scope": "@loopback",
+    "rawSpec": "0.5.4",
+    "saveSpec": null,
+    "fetchSpec": "0.5.4"
+  },
+  "_requiredBy": [
+    "/@loopback/authentication",
+    "/@loopback/authentication-jwt"
+  ],
+  "_resolved": "https://registry.npmjs.org/@loopback/security/-/security-0.5.4.tgz",
+  "_spec": "0.5.4",
+  "_where": "C:\\Users\\LENOVO\\Desktop\\GeneralWorks\\ExternalWorks\\Faseya\\AlloRabbitProject\\allorabbitapi2",
+  "author": {
+    "name": "IBM Corp."
+  },
+  "bugs": {
+    "url": "https://github.com/loopbackio/loopback-next/issues"
+  },
+  "copyright.owner": "IBM Corp.",
+  "dependencies": {
+    "debug": "^4.3.2",
+    "tslib": "^2.3.1"
+  },
+  "description": "A LoopBack component for security support.",
+  "devDependencies": {
+    "@loopback/build": "^7.0.2",
+    "@loopback/core": "^2.18.0",
+    "@loopback/testlab": "^3.4.4",
+    "@types/debug": "^4.1.7",
+    "@types/node": "^10.17.60"
+  },
+  "engines": {
+    "node": "^10.16 || 12 || 14 || 16"
+  },
+  "files": [
+    "README.md",
+    "dist",
+    "src",
+    "!*/__tests__"
+  ],
+  "gitHead": "d9a29c85dbe38f12ba219d8c495cf6038bbc3590",
+  "homepage": "https://github.com/loopbackio/loopback-next#readme",
+  "keywords": [
+    "LoopBack",
+    "Security"
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "name": "@loopback/security",
+  "peerDependencies": {
+    "@loopback/core": "^2.18.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loopbackio/loopback-next.git",
+    "directory": "packages/security"
+  },
+  "scripts": {
+    "acceptance": "lb-mocha \"dist/__tests__/acceptance/**/*.js\"",
+    "build": "lb-tsc",
+    "clean": "lb-clean loopback-security*.tgz dist package *.tsbuildinfo",
+    "integration": "lb-mocha \"dist/__tests__/integration/**/*.js\"",
+    "pretest": "npm run build",
+    "test": "lb-mocha \"dist/__tests__/**/*.js\"",
+    "unit": "lb-mocha \"dist/__tests__/unit/**/*.js\"",
+    "verify": "npm pack && tar xf loopback-security*.tgz && tree package && npm run clean"
+  },
+  "types": "dist/index.d.ts",
+  "version": "0.5.4"
+}

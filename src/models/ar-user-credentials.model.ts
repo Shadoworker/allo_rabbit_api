@@ -27,6 +27,11 @@ export class ArUserCredentials extends Entity {
   })
   password: string;
 
+  // @property({
+  //   type: 'string',
+  // })
+  // userId: string;
+
   @property({
     type: 'string',
   })

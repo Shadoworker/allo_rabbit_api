@@ -17,10 +17,10 @@ let ArUserService = class ArUserService {
         this.arUserCredentialsRepository = arUserCredentialsRepository;
     }
     // User --> ArUser
-    async verifyCredentials(credentials) {
+    async verifyCredentials(arusercredentials) {
         const invalidCredentialsError = 'Invalid phone or password.';
         const foundUser = await this.arUserRepository.findOne({
-            where: { phone: credentials.phone },
+            where: { phone: arusercredentials.phone },
         });
         if (!foundUser) {
             throw new rest_1.HttpErrors.Unauthorized(invalidCredentialsError);
@@ -30,7 +30,7 @@ let ArUserService = class ArUserService {
         if (!credentialsFound) {
             throw new rest_1.HttpErrors.Unauthorized(invalidCredentialsError);
         }
-        const passwordMatched = await bcryptjs_1.compare(credentials.password, credentialsFound.password);
+        const passwordMatched = await bcryptjs_1.compare(arusercredentials.password, credentialsFound.password);
         // console.log(passwordMatched);
         if (!passwordMatched) {
             throw new rest_1.HttpErrors.Unauthorized(invalidCredentialsError);
