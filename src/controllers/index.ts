@@ -22,3 +22,4 @@ export * from './restaurant-validation-request.controller';
 export * from './restaurant.controller';
 export * from './roles.controller';
 export * from './sos.controller';
+export * from './restaurant-restaurant-category.controller';

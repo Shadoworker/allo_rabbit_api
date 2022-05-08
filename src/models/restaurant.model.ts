@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasOne} from '@loopback/repository';
+import {RestaurantCategory} from './restaurant-category.model';
 
 @model({settings: {strict: false}})
 export class Restaurant extends Entity {
@@ -44,6 +45,8 @@ export class Restaurant extends Entity {
   })
   isValidated?: boolean;
 
+  @hasOne(() => RestaurantCategory)
+  restaurantCategory: RestaurantCategory;
   // Define well-known properties here
 
   // Indexer property to allow additional data
