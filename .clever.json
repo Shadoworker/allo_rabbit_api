@@ -1,0 +1,11 @@
+{
+  "apps": [
+    {
+      "app_id": "app_81ab69ec-0690-42ea-967a-37508fad0e5a",
+      "org_id": "user_52a52291-d6ee-4862-b701-db08bbf485ef",
+      "deploy_url": "https://push-n2-par-clevercloud-customers.services.clever-cloud.com/app_81ab69ec-0690-42ea-967a-37508fad0e5a.git",
+      "name": "allo_rabbit_api",
+      "alias": "allo_rabbit_api"
+    }
+  ]
+}
