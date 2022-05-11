@@ -46,14 +46,17 @@ let UserController = class UserController {
     }
     async login(credentials) {
         // console.log(credentials)
+        // client.createNotification({})
         // ensure the user exists, and the password is correct
-        const user = await this.userService.verifyCredentials(credentials);
+        const _user = await this.userService.verifyCredentials(credentials);
         // convert a User object into a UserProfile object (reduced set of properties)
-        const userProfile = this.userService.convertToUserProfile(user);
+        const userProfile = this.userService.convertToUserProfile(_user);
+        let user = { ..._user };
         // console.log(userProfile)
         // create a JSON Web Token based on the user profile
         const token = await this.jwtService.generateToken(userProfile);
-        return { token };
+        user.token = token;
+        return user;
     }
     async whoAmI(currentUserProfile) {
         return currentUserProfile[security_1.securityId];

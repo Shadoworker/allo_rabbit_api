@@ -8,6 +8,7 @@ export class Restaurant extends Entity {
     type: 'string',
     id: true,
     generated: false,
+    defaultFn: 'uuidv4',
   })
   id?: string;
 

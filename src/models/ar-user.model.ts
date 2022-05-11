@@ -16,9 +16,9 @@
 
 
 import { User } from '@loopback/authentication-jwt';
-import { Entity, hasOne, model, property, hasMany} from '@loopback/repository';
+import { Entity, hasOne, model, property, hasMany } from '@loopback/repository';
 import { ArUserCredentials } from './ar-user-credentials.model';
-import {Roles} from './roles.model';
+import { Roles } from './roles.model';
 
 // import {Language} from './language.model';
 
@@ -87,6 +87,11 @@ export class ArUser extends Entity {
     type: 'string',
   })
   resetPasswordCode?: string;
+
+  @property({
+    type: 'string',
+  })
+  pushToken?: string;
 
   @hasOne(() => ArUserCredentials)
   userCredentials: ArUserCredentials;

@@ -3,7 +3,7 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-import {ApplicationConfig, TodoListApplication} from './application';
+import { ApplicationConfig, TodoListApplication } from './application';
 
 // re-exports for our benchmark, not needed for the tutorial itself
 export * from '@loopback/rest';
@@ -17,6 +17,7 @@ export async function main(options: ApplicationConfig = {}) {
   await app.start();
 
   const url = app.restServer.url;
+
   console.log(`Server is running at ${url}`);
   return app;
 }

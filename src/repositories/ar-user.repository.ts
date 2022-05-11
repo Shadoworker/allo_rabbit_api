@@ -5,12 +5,12 @@
 
 import { UserCredentials, UserCredentialsRepository } from '@loopback/authentication-jwt';
 import { Getter, inject } from '@loopback/core';
-import { DefaultCrudRepository, HasOneRepositoryFactory, juggler, repository, HasManyRepositoryFactory} from '@loopback/repository';
+import { DefaultCrudRepository, HasOneRepositoryFactory, juggler, repository, HasManyRepositoryFactory } from '@loopback/repository';
 import { DbDataSource, MysqlDatasourceDataSource } from '../datasources';
-import { ArUser, ArUserCredentials, ArUserRelations, Roles} from '../models';
+import { ArUser, ArUserCredentials, ArUserRelations, Roles } from '../models';
 import { ArUserService, Credentials } from '../services/ar-user.service';
 import { ArUserCredentialsRepository } from './ar-user-credentials.repository';
-import {RolesRepository} from './roles.repository';
+import { RolesRepository } from './roles.repository';
 
 export class ArUserRepository extends DefaultCrudRepository<
   ArUser,

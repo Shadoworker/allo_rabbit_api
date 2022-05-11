@@ -29,6 +29,7 @@ export class ArUserService implements UserService<ArUser, ArUserCredentials> {
 
     const foundUser = await this.arUserRepository.findOne({
       where: { phone: arusercredentials.phone },
+      include: [{ relation: 'roles' }]
     });
     if (!foundUser) {
       throw new HttpErrors.Unauthorized(invalidCredentialsError);

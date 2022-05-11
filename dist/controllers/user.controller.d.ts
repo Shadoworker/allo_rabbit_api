@@ -19,9 +19,7 @@ export declare class UserController {
     user: UserProfile;
     protected userRepository: ArUserRepository;
     constructor(jwtService: TokenService, userService: ArUserService, user: UserProfile, userRepository: ArUserRepository);
-    login(credentials: ArUserCredentials): Promise<{
-        token: string;
-    }>;
+    login(credentials: ArUserCredentials): Promise<object>;
     whoAmI(currentUserProfile: UserProfile): Promise<string>;
     signUp(newUserRequest: ArUser): Promise<ArUser>;
 }

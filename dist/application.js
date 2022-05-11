@@ -9,7 +9,6 @@ const tslib_1 = require("tslib");
 // ---------- ADD IMPORTS -------------
 const authentication_1 = require("@loopback/authentication");
 const authentication_jwt_1 = require("@loopback/authentication-jwt");
-const index_1 = require("./loopauth/authentication-jwt/src/index");
 const datasources_1 = require("./datasources");
 // ------------------------------------
 const ar_user_service_1 = require("./services/ar-user.service");
@@ -31,12 +30,12 @@ class TodoListApplication extends boot_1.BootMixin(service_proxy_1.ServiceMixin(
         // Mount jwt component
         this.component(authentication_jwt_1.JWTAuthenticationComponent);
         // Bind datasource
-        this.dataSource(datasources_1.DbDataSource, index_1.UserServiceBindings.DATASOURCE_NAME);
+        this.dataSource(datasources_1.DbDataSource, authentication_jwt_1.UserServiceBindings.DATASOURCE_NAME);
         // ------------- END OF SNIPPET -------------
         // Bind user service
-        this.bind(index_1.UserServiceBindings.USER_SERVICE).toClass(ar_user_service_1.ArUserService);
+        this.bind(authentication_jwt_1.UserServiceBindings.USER_SERVICE).toClass(ar_user_service_1.ArUserService);
         // Bind user and credentials repository
-        this.bind(index_1.UserServiceBindings.USER_REPOSITORY).toClass(repositories_1.ArUserRepository);
+        this.bind(authentication_jwt_1.UserServiceBindings.USER_REPOSITORY).toClass(repositories_1.ArUserRepository);
         // Set up the custom sequence
         this.sequence(sequence_1.MySequence);
         // Set up default home page

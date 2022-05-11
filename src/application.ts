@@ -7,11 +7,8 @@ import { AuthenticationComponent } from '@loopback/authentication';
 import {
   JWTAuthenticationComponent,
   SECURITY_SCHEME_SPEC,
-
+  UserServiceBindings,
 } from '@loopback/authentication-jwt';
-import {
-  UserServiceBindings
-} from './loopauth/authentication-jwt/src/index'
 import { DbDataSource } from './datasources';
 // ------------------------------------
 import { ArUserService } from './services/ar-user.service';
@@ -28,7 +25,6 @@ import morgan from 'morgan';
 import path from 'path';
 import { MySequence } from './sequence';
 import { ArUserRepository } from './repositories';
-// import { UserServiceBindings } from './bindings/ar-user-service-bindings';
 
 export { ApplicationConfig };
 
@@ -101,3 +97,5 @@ export class TodoListApplication extends BootMixin(
     });
   }
 }
+
+

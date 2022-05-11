@@ -6,6 +6,7 @@ export class ProductCategory extends Entity {
     type: 'string',
     id: true,
     generated: false,
+    defaultFn: 'uuidv4',
   })
   id?: string;
 

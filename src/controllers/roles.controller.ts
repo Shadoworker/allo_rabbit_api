@@ -26,7 +26,8 @@ import { inject } from '@loopback/core';
 
 // @authenticate('jwt')
 export class RolesController {
-  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+  constructor(
+    // @inject(SecurityBindings.USER) private user: UserProfile,
 
     @repository(RolesRepository)
     public rolesRepository: RolesRepository,

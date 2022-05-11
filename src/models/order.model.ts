@@ -9,6 +9,7 @@ export class Order extends Entity {
     type: 'string',
     id: true,
     generated: false,
+    defaultFn: 'uuidv4',
   })
   id?: string;
 
@@ -21,6 +22,11 @@ export class Order extends Entity {
     type: 'string',
   })
   status?: string;
+
+  @property({
+    type: 'string',
+  })
+  code?: string;
 
   @property({
     type: 'date',

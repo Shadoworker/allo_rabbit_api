@@ -6,7 +6,8 @@ export class City extends Entity {
   @property({
     type: 'string',
     id: true,
-    generated: false
+    generated: false,
+    defaultFn: 'uuidv4',
   })
   id?: string;
 

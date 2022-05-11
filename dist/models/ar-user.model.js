@@ -87,6 +87,12 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", String)
 ], ArUser.prototype, "resetPasswordCode", void 0);
 tslib_1.__decorate([
+    repository_1.property({
+        type: 'string',
+    }),
+    tslib_1.__metadata("design:type", String)
+], ArUser.prototype, "pushToken", void 0);
+tslib_1.__decorate([
     repository_1.hasOne(() => ar_user_credentials_model_1.ArUserCredentials),
     tslib_1.__metadata("design:type", ar_user_credentials_model_1.ArUserCredentials)
 ], ArUser.prototype, "userCredentials", void 0);

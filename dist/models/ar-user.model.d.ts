@@ -13,6 +13,7 @@ export declare class ArUser extends Entity {
     isActivated?: boolean;
     activationCode?: string;
     resetPasswordCode?: string;
+    pushToken?: string;
     userCredentials: ArUserCredentials;
     arUserCredentials: ArUserCredentials;
     roles: Roles[];
