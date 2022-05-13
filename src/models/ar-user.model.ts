@@ -20,6 +20,7 @@ import { Entity, hasOne, model, property, hasMany } from '@loopback/repository';
 import { ArUserCredentials } from './ar-user-credentials.model';
 import { Roles } from './roles.model';
 import { Restaurant } from './restaurant.model';
+import {ProductCategory} from './product-category.model';
 
 // import {Language} from './language.model';
 
@@ -108,6 +109,9 @@ export class ArUser extends Entity {
 
   @hasMany(() => Restaurant)
   restaurants: Restaurant[];
+
+  @hasMany(() => ProductCategory)
+  productCategories: ProductCategory[];
   // @property({
   //   type: 'string',
   // })

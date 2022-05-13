@@ -6,6 +6,7 @@ const tslib_1 = require("tslib");
 const repository_1 = require("@loopback/repository");
 const ar_user_credentials_model_1 = require("./ar-user-credentials.model");
 const restaurant_model_1 = require("./restaurant.model");
+const product_category_model_1 = require("./product-category.model");
 // import {Language} from './language.model';
 let ArUser = class ArUser extends repository_1.Entity {
     constructor(data) {
@@ -111,6 +112,10 @@ tslib_1.__decorate([
     repository_1.hasMany(() => restaurant_model_1.Restaurant),
     tslib_1.__metadata("design:type", Array)
 ], ArUser.prototype, "restaurants", void 0);
+tslib_1.__decorate([
+    repository_1.hasMany(() => product_category_model_1.ProductCategory),
+    tslib_1.__metadata("design:type", Array)
+], ArUser.prototype, "productCategories", void 0);
 ArUser = tslib_1.__decorate([
     repository_1.model({ settings: { strict: true } }),
     tslib_1.__metadata("design:paramtypes", [Object])

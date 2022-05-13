@@ -7,10 +7,11 @@ import { UserCredentials, UserCredentialsRepository } from '@loopback/authentica
 import { Getter, inject } from '@loopback/core';
 import { DefaultCrudRepository, HasOneRepositoryFactory, juggler, repository, HasManyRepositoryFactory } from '@loopback/repository';
 import { DbDataSource, MysqlDatasourceDataSource } from '../datasources';
-import { ArUser, ArUserCredentials, ArUserRelations, Restaurant} from '../models';
+import { ArUser, ArUserCredentials, ArUserRelations, Restaurant, ProductCategory} from '../models';
 import { ArUserService, Credentials } from '../services/ar-user.service';
 import { ArUserCredentialsRepository } from './ar-user-credentials.repository';
 import {RestaurantRepository} from './restaurant.repository';
+import {ProductCategoryRepository} from './product-category.repository';
 
 // import { RolesRepository } from './roles.repository';
 
@@ -26,14 +27,18 @@ export class ArUserRepository extends DefaultCrudRepository<
 
   public readonly restaurants: HasManyRepositoryFactory<Restaurant, typeof ArUser.prototype.id>;
 
+  public readonly productCategories: HasManyRepositoryFactory<ProductCategory, typeof ArUser.prototype.id>;
+
   constructor(
     @inject('datasources.mysqlDatasource') dataSource: MysqlDatasourceDataSource,
     // @inject(`datasources.${ArUserServiceBindings.DATASOURCE_NAME}`)
     // dataSource: juggler.DataSource,
     @repository.getter('ArUserCredentialsRepository')
-    protected userCredentialsRepositoryGetter: Getter<ArUserCredentialsRepository>, @repository.getter('ArUserCredentialsRepository') protected arUserCredentialsRepositoryGetter: Getter<ArUserCredentialsRepository>, @repository.getter('RestaurantRepository') protected restaurantRepositoryGetter: Getter<RestaurantRepository>,
+    protected userCredentialsRepositoryGetter: Getter<ArUserCredentialsRepository>, @repository.getter('ArUserCredentialsRepository') protected arUserCredentialsRepositoryGetter: Getter<ArUserCredentialsRepository>, @repository.getter('RestaurantRepository') protected restaurantRepositoryGetter: Getter<RestaurantRepository>, @repository.getter('ProductCategoryRepository') protected productCategoryRepositoryGetter: Getter<ProductCategoryRepository>,
   ) {
     super(ArUser, dataSource);
+    this.productCategories = this.createHasManyRepositoryFactoryFor('productCategories', productCategoryRepositoryGetter,);
+    this.registerInclusionResolver('productCategories', this.productCategories.inclusionResolver);
     this.restaurants = this.createHasManyRepositoryFactoryFor('restaurants', restaurantRepositoryGetter,);
     this.registerInclusionResolver('restaurants', this.restaurants.inclusionResolver);
 

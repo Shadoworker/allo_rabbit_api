@@ -1,6 +1,7 @@
-import { Entity, model, property, hasOne, belongsTo } from '@loopback/repository';
+import { Entity, model, property, hasOne, belongsTo, hasMany} from '@loopback/repository';
 import { RestaurantCategory } from './restaurant-category.model';
 import { ArUser } from './ar-user.model';
+import {Product} from './product.model';
 
 @model({ settings: { strict: true } })
 export class Restaurant extends Entity {
@@ -52,6 +53,9 @@ export class Restaurant extends Entity {
 
   @belongsTo(() => ArUser)
   arUserId: string;
+
+  @hasMany(() => Product)
+  products: Product[];
   // Define well-known properties here
 
   // Indexer property to allow additional data

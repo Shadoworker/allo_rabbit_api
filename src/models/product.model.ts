@@ -1,7 +1,8 @@
 import { Entity, model, property, hasOne, belongsTo } from '@loopback/repository';
 import { ProductCategory } from './product-category.model';
+import {Restaurant} from './restaurant.model';
 
-@model({ settings: { strict: true } })
+@model({settings: {strict: true}})
 export class Product extends Entity {
   @property({
     type: 'string',
@@ -69,6 +70,9 @@ export class Product extends Entity {
 
   @belongsTo(() => ProductCategory)
   productCategoryId: string;
+
+  @belongsTo(() => Restaurant)
+  restaurantId: string;
   // Define well-known properties here
 
   // Indexer property to allow additional data
