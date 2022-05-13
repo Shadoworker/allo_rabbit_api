@@ -1,4 +1,5 @@
-import { Entity, model, property } from '@loopback/repository';
+import { Entity, model, property, hasMany } from '@loopback/repository';
+import { ArUser } from './ar-user.model';
 
 @model()
 export class Roles extends Entity {
@@ -16,10 +17,17 @@ export class Roles extends Entity {
   })
   name: string;
 
-  @property({
-    type: 'string',
-  })
-  arUserId?: string;
+  // @hasMany(() => ArUser)
+  // arUsers: ArUser[];
+
+  // @property({
+  //   type: 'string',
+  // })
+  // arUserId?: string;
+  // @property({
+  //   type: 'string',
+  // })
+  // arUserId?: string;
 
   constructor(data?: Partial<Roles>) {
     super(data);

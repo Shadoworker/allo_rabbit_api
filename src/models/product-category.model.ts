@@ -1,6 +1,8 @@
-import { Entity, model, property } from '@loopback/repository';
+import { Entity, model, property, belongsTo, hasMany } from '@loopback/repository';
+import { ArUser } from './ar-user.model';
+import { Product } from './product.model';
 
-@model({ settings: { strict: false } })
+@model({ settings: { strict: true } })
 export class ProductCategory extends Entity {
   @property({
     type: 'string',
@@ -26,10 +28,11 @@ export class ProductCategory extends Entity {
   })
   description?: string;
 
-  @property({
-    type: 'string',
-  })
-  productId?: string;
+  @belongsTo(() => ArUser)
+  arUserId: string;
+
+  @hasMany(() => Product)
+  products: Product[];
   // Define well-known properties here
 
   // Indexer property to allow additional data

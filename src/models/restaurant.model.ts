@@ -2,7 +2,7 @@ import { Entity, model, property, hasOne, belongsTo } from '@loopback/repository
 import { RestaurantCategory } from './restaurant-category.model';
 import { ArUser } from './ar-user.model';
 
-@model({ settings: { strict: false } })
+@model({ settings: { strict: true } })
 export class Restaurant extends Entity {
   @property({
     type: 'string',

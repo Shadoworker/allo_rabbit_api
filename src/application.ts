@@ -20,9 +20,11 @@ import {
   RestExplorerBindings,
   RestExplorerComponent,
 } from '@loopback/rest-explorer';
+import multer from 'multer';
 import { ServiceMixin } from '@loopback/service-proxy';
 import morgan from 'morgan';
 import path from 'path';
+import { FILE_UPLOAD_SERVICE, STORAGE_DIRECTORY } from './keys';
 import { MySequence } from './sequence';
 import { ArUserRepository } from './repositories';
 
@@ -34,7 +36,7 @@ export class TodoListApplication extends BootMixin(
   constructor(options: ApplicationConfig = {}) {
     super(options);
 
-
+    this.configureFileUpload(options.fileStorageDirectory);
     // ------ ADD SNIPPET AT THE BOTTOM ---------
     // Mount authentication system
     this.component(AuthenticationComponent);
@@ -96,6 +98,24 @@ export class TodoListApplication extends BootMixin(
       key: 'middleware.morgan',
     });
   }
+
+  protected configureFileUpload(destination?: string) {
+    // Upload files to `dist/.sandbox` by default
+    destination = destination ?? path.join(__dirname, '../files');
+    this.bind(STORAGE_DIRECTORY).to(destination);
+    const multerOptions: multer.Options = {
+      storage: multer.diskStorage({
+        destination,
+        // Use the original file name as is
+        filename: (req, file, cb) => {
+          cb(null, file.originalname);
+        },
+      }),
+    };
+    // Configure the file upload service with multer options
+    this.configure(FILE_UPLOAD_SERVICE).to(multerOptions);
+  }
+
 }
 
 

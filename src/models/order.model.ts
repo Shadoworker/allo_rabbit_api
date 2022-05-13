@@ -3,7 +3,7 @@ import { ArUser } from './ar-user.model';
 import { Restaurant } from './restaurant.model';
 import { Currency } from './currency.model';
 
-@model({ settings: { strict: false } })
+@model({ settings: { strict: true } })
 export class Order extends Entity {
   @property({
     type: 'string',

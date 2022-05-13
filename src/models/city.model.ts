@@ -1,7 +1,7 @@
 import { Entity, model, property, belongsTo } from '@loopback/repository';
 import { Country } from './country.model';
 
-@model({ settings: { strict: false } })
+@model({ settings: { strict: true } })
 export class City extends Entity {
   @property({
     type: 'string',

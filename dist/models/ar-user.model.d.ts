@@ -1,6 +1,6 @@
 import { Entity } from '@loopback/repository';
 import { ArUserCredentials } from './ar-user-credentials.model';
-import { Roles } from './roles.model';
+import { Restaurant } from './restaurant.model';
 export declare class ArUser extends Entity {
     id: string;
     phone: string;
@@ -13,10 +13,11 @@ export declare class ArUser extends Entity {
     isActivated?: boolean;
     activationCode?: string;
     resetPasswordCode?: string;
+    roles?: string[];
     pushToken?: string;
     userCredentials: ArUserCredentials;
     arUserCredentials: ArUserCredentials;
-    roles: Roles[];
+    restaurants: Restaurant[];
     [prop: string]: any;
     constructor(data?: Partial<ArUser>);
 }

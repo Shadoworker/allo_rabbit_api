@@ -1,7 +1,7 @@
 import { Entity, model, property, belongsTo } from '@loopback/repository';
 import { Deliverer } from './deliverer.model';
 
-@model({ settings: { strict: false } })
+@model({ settings: { strict: true } })
 export class Sos extends Entity {
   @property({
     type: 'string',

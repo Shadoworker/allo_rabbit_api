@@ -2,7 +2,7 @@ import { Entity, model, property, belongsTo } from '@loopback/repository';
 import { Order } from './order.model';
 import { Product } from './product.model';
 
-@model({ settings: { strict: false } })
+@model({ settings: { strict: true } })
 export class OrderedProduct extends Entity {
   @property({
     type: 'string',

@@ -4,3 +4,4 @@
 // License text available at https://opensource.org/licenses/MIT
 
 export * from './ar-user.service';
+export * from './file-upload.service';

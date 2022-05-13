@@ -42,7 +42,7 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", String)
 ], ArUserCredentials.prototype, "arUserId", void 0);
 ArUserCredentials = tslib_1.__decorate([
-    repository_1.model({ settings: { strict: false } }),
+    repository_1.model({ settings: { strict: true } }),
     tslib_1.__metadata("design:paramtypes", [Object])
 ], ArUserCredentials);
 exports.ArUserCredentials = ArUserCredentials;

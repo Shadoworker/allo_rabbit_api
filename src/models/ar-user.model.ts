@@ -19,10 +19,11 @@ import { User } from '@loopback/authentication-jwt';
 import { Entity, hasOne, model, property, hasMany } from '@loopback/repository';
 import { ArUserCredentials } from './ar-user-credentials.model';
 import { Roles } from './roles.model';
+import { Restaurant } from './restaurant.model';
 
 // import {Language} from './language.model';
 
-@model({ settings: { strict: false } })
+@model({ settings: { strict: true } })
 export class ArUser extends Entity {
 
   @property({
@@ -89,6 +90,12 @@ export class ArUser extends Entity {
   resetPasswordCode?: string;
 
   @property({
+    type: 'array',
+    itemType: 'string',
+  })
+  roles?: string[];
+
+  @property({
     type: 'string',
   })
   pushToken?: string;
@@ -99,8 +106,17 @@ export class ArUser extends Entity {
   @hasOne(() => ArUserCredentials)
   arUserCredentials: ArUserCredentials;
 
-  @hasMany(() => Roles)
-  roles: Roles[];
+  @hasMany(() => Restaurant)
+  restaurants: Restaurant[];
+  // @property({
+  //   type: 'string',
+  // })
+  // rolesId?: string;
+
+  // @hasMany(() => Roles)
+  // roles: Roles[];
+  // @hasMany(() => Roles)
+  // roles: Roles[];
   // @hasOne(() => Language)
   // language: Language;
   // Define well-known properties here

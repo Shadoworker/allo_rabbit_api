@@ -270,4 +270,5 @@ declare const TodoListApplication_base: (new (...args: any[]) => {
 export declare class TodoListApplication extends TodoListApplication_base {
     constructor(options?: ApplicationConfig);
     private setupLogging;
+    protected configureFileUpload(destination?: string): void;
 }

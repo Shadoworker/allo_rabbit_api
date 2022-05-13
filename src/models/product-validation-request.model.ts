@@ -1,7 +1,7 @@
 import { Entity, model, property, belongsTo } from '@loopback/repository';
 import { Product } from './product.model';
 
-@model({ settings: { strict: false } })
+@model({ settings: { strict: true } })
 export class ProductValidationRequest extends Entity {
   @property({
     type: 'string',
