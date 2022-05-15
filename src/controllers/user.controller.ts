@@ -17,8 +17,11 @@ import { model, property, repository } from '@loopback/repository';
 import {
   get,
   getModelSchemaRef,
+  param,
+  patch,
   post,
   requestBody,
+  response,
   SchemaObject,
 } from '@loopback/rest';
 import { SecurityBindings, securityId, UserProfile } from '@loopback/security';
@@ -162,4 +165,28 @@ export class UserController {
 
     return savedUser;
   }
+
+  @patch('/ar-users/{id}')
+  @response(204, {
+    description: 'ArUser PATCH success',
+  })
+  async updateById(
+    @param.path.string('id') id: string,
+    @requestBody({
+      content: {
+        'application/json': {
+          schema: getModelSchemaRef(ArUser, { partial: true }),
+        },
+      },
+    })
+    aruser: ArUser,
+  ): Promise<any> {
+    const updatedUser = await this.userRepository.updateById(id, aruser);
+    return updatedUser;
+  }
+
+
+
+
+
 }

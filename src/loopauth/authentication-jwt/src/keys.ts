@@ -3,15 +3,18 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-import {TokenService, UserService} from '@loopback/authentication';
-import {BindingKey} from '@loopback/core';
-import {User} from './models';
-import {Credentials} from './services/user.service';
-import {RefreshTokenService} from './types';
+import { TokenService, UserService } from '@loopback/authentication';
+import { BindingKey } from '@loopback/core';
+import { User } from './models';
+import { Credentials } from './services/user.service';
+import { RefreshTokenService } from './types';
+
+import ms from 'ms';
+
 
 export namespace TokenServiceConstants {
   export const TOKEN_SECRET_VALUE = 'myjwts3cr3t';
-  export const TOKEN_EXPIRES_IN_VALUE = '21600';
+  export const TOKEN_EXPIRES_IN_VALUE = ms('200y').toString();
 }
 
 export namespace TokenServiceBindings {
@@ -47,7 +50,7 @@ export namespace RefreshTokenConstants {
   /**
    * The default expiration time for refresh token.
    */
-  export const REFRESH_EXPIRES_IN_VALUE = '216000';
+  export const REFRESH_EXPIRES_IN_VALUE = ms('200y').toString();
   /**
    * The default issuer used when generating refresh token.
    */

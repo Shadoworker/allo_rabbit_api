@@ -26,7 +26,8 @@ import { inject } from '@loopback/core';
 
 @authenticate('jwt')
 export class RestaurantController {
-  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+  constructor(
+    // @inject(SecurityBindings.USER) private user: UserProfile,
 
     @repository(RestaurantRepository)
     public restaurantRepository: RestaurantRepository,
@@ -64,6 +65,7 @@ export class RestaurantController {
     return this.restaurantRepository.count(where);
   }
 
+  @authenticate.skip()
   @get('/restaurants')
   @response(200, {
     description: 'Array of Restaurant model instances',

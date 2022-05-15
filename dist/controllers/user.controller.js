@@ -68,6 +68,10 @@ let UserController = class UserController {
         await this.userRepository.arUserCredentials(savedUser.id).create({ password });
         return savedUser;
     }
+    async updateById(id, aruser) {
+        const updatedUser = await this.userRepository.updateById(id, aruser);
+        return updatedUser;
+    }
 };
 tslib_1.__decorate([
     rest_1.post('/users/login', {
@@ -143,6 +147,23 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [models_1.ArUser]),
     tslib_1.__metadata("design:returntype", Promise)
 ], UserController.prototype, "signUp", null);
+tslib_1.__decorate([
+    rest_1.patch('/ar-users/{id}'),
+    rest_1.response(204, {
+        description: 'ArUser PATCH success',
+    }),
+    tslib_1.__param(0, rest_1.param.path.string('id')),
+    tslib_1.__param(1, rest_1.requestBody({
+        content: {
+            'application/json': {
+                schema: rest_1.getModelSchemaRef(models_1.ArUser, { partial: true }),
+            },
+        },
+    })),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [String, models_1.ArUser]),
+    tslib_1.__metadata("design:returntype", Promise)
+], UserController.prototype, "updateById", null);
 UserController = tslib_1.__decorate([
     tslib_1.__param(0, core_1.inject(authentication_jwt_1.TokenServiceBindings.TOKEN_SERVICE)),
     tslib_1.__param(1, core_1.inject(authentication_jwt_1.UserServiceBindings.USER_SERVICE)),

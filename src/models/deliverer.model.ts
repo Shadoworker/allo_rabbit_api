@@ -1,7 +1,8 @@
-import { Entity, model, property, belongsTo } from '@loopback/repository';
+import { Entity, model, property, belongsTo, hasMany} from '@loopback/repository';
 import { ArUser } from './ar-user.model';
+import {Order} from './order.model';
 
-@model({ settings: { strict: true } })
+@model({settings: {strict: true}})
 export class Deliverer extends Entity {
   @property({
     type: 'string',
@@ -23,6 +24,14 @@ export class Deliverer extends Entity {
 
   @belongsTo(() => ArUser)
   arUserId: string;
+
+  @property({
+    type: 'string',
+  })
+  orderId?: string;
+
+  @hasMany(() => Order)
+  orders: Order[];
   // Define well-known properties here
 
   // Indexer property to allow additional data

@@ -22,4 +22,5 @@ export declare class UserController {
     login(credentials: ArUserCredentials): Promise<object>;
     whoAmI(currentUserProfile: UserProfile): Promise<string>;
     signUp(newUserRequest: ArUser): Promise<ArUser>;
+    updateById(id: string, aruser: ArUser): Promise<any>;
 }

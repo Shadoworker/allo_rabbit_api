@@ -3,7 +3,7 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-import {registerAuthenticationStrategy} from '@loopback/authentication';
+import { registerAuthenticationStrategy } from '@loopback/authentication';
 import {
   Application,
   Binding,
@@ -24,10 +24,11 @@ import {
   UserCredentialsRepository,
   UserRepository,
 } from './repositories';
-import {MyUserService, RefreshtokenService} from './services';
-import {JWTAuthenticationStrategy} from './services/jwt.auth.strategy';
-import {JWTService} from './services/jwt.service';
-import {SecuritySpecEnhancer} from './services/security.spec.enhancer';
+import { MyUserService, RefreshtokenService } from './services';
+import { JWTAuthenticationStrategy } from './services/jwt.auth.strategy';
+import { JWTService } from './services/jwt.service';
+import { SecuritySpecEnhancer } from './services/security.spec.enhancer';
+
 
 export class JWTAuthenticationComponent implements Component {
   bindings: Binding[] = [
