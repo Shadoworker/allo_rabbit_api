@@ -41,3 +41,6 @@ export * from './file-download.controller';
 export * from './product-restaurant.controller';
 export * from './restaurant-product.controller';
 export * from './ar-user-product-category.controller';
+export * from './order-deliverer.controller';
+export * from './deliverer-order.controller';
+export * from './ar-user-order.controller';

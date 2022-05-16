@@ -21,6 +21,7 @@ import { ArUserCredentials } from './ar-user-credentials.model';
 import { Roles } from './roles.model';
 import { Restaurant } from './restaurant.model';
 import {ProductCategory} from './product-category.model';
+import {Order} from './order.model';
 
 // import {Language} from './language.model';
 
@@ -112,6 +113,9 @@ export class ArUser extends Entity {
 
   @hasMany(() => ProductCategory)
   productCategories: ProductCategory[];
+
+  @hasMany(() => Order, {through: {model: () => Restaurant}})
+  orders: Order[];
   // @property({
   //   type: 'string',
   // })

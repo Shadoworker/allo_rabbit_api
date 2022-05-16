@@ -26,7 +26,8 @@ import { inject } from '@loopback/core';
 
 // @authenticate('jwt')
 export class DelivererController {
-  constructor(@inject(SecurityBindings.USER) private user: UserProfile,
+  constructor(
+    // @inject(SecurityBindings.USER) private user: UserProfile,
 
     @repository(DelivererRepository)
     public delivererRepository: DelivererRepository,

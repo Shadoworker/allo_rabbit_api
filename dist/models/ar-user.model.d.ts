@@ -2,6 +2,7 @@ import { Entity } from '@loopback/repository';
 import { ArUserCredentials } from './ar-user-credentials.model';
 import { Restaurant } from './restaurant.model';
 import { ProductCategory } from './product-category.model';
+import { Order } from './order.model';
 export declare class ArUser extends Entity {
     id: string;
     phone: string;
@@ -20,6 +21,7 @@ export declare class ArUser extends Entity {
     arUserCredentials: ArUserCredentials;
     restaurants: Restaurant[];
     productCategories: ProductCategory[];
+    orders: Order[];
     [prop: string]: any;
     constructor(data?: Partial<ArUser>);
 }

@@ -49,4 +49,7 @@ tslib_1.__exportStar(require("./file-download.controller"), exports);
 tslib_1.__exportStar(require("./product-restaurant.controller"), exports);
 tslib_1.__exportStar(require("./restaurant-product.controller"), exports);
 tslib_1.__exportStar(require("./ar-user-product-category.controller"), exports);
+tslib_1.__exportStar(require("./order-deliverer.controller"), exports);
+tslib_1.__exportStar(require("./deliverer-order.controller"), exports);
+tslib_1.__exportStar(require("./ar-user-order.controller"), exports);
 //# sourceMappingURL=index.js.map

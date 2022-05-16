@@ -2,9 +2,9 @@ import { Entity, model, property, belongsTo, hasOne } from '@loopback/repository
 import { ArUser } from './ar-user.model';
 import { Restaurant } from './restaurant.model';
 import { Currency } from './currency.model';
-import {Deliverer} from './deliverer.model';
+import { Deliverer } from './deliverer.model';
 
-@model({settings: {strict: true}})
+@model({ settings: { strict: true } })
 export class Order extends Entity {
   @property({
     type: 'string',
@@ -15,9 +15,33 @@ export class Order extends Entity {
   id?: string;
 
   @property({
+    type: 'string',
+    default: 'Commande'
+  })
+  name?: string;
+
+  @property({
+    type: 'string',
+    default: 'default'
+  })
+  image?: string;
+
+  @property({
+    type: 'number',
+    generated: true,
+  })
+  orderId?: number;
+
+  @property({
     type: 'number',
   })
   amount?: number;
+
+  @property({
+    type: 'number',
+    default: 0,
+  })
+  deliveryCharges?: number;
 
   @property({
     type: 'string',
@@ -38,6 +62,11 @@ export class Order extends Entity {
     type: 'date',
   })
   updated_at?: string;
+
+  @property({
+    type: 'object',
+  })
+  geolocation?: object;
 
   @belongsTo(() => ArUser)
   arUserId: string;

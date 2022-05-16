@@ -13,6 +13,16 @@ export class OrderedProduct extends Entity {
   id?: string;
 
   @property({
+    type: 'number',
+  })
+  price?: number;
+
+  @property({
+    type: 'number',
+  })
+  quantity?: number;
+
+  @property({
     type: 'date',
   })
   created_at?: string;

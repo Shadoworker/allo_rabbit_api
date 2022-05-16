@@ -21,7 +21,7 @@ let ArUserService = class ArUserService {
         const invalidCredentialsError = 'Invalid phone or password.';
         const foundUser = await this.arUserRepository.findOne({
             where: { phone: arusercredentials.phone },
-            // include: [{ relation: 'roles' }]
+            // include: [{ relation: 'deliverer' }]
         });
         if (!foundUser) {
             throw new rest_1.HttpErrors.Unauthorized(invalidCredentialsError);

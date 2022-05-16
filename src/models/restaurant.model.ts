@@ -3,7 +3,7 @@ import { RestaurantCategory } from './restaurant-category.model';
 import { ArUser } from './ar-user.model';
 import {Product} from './product.model';
 
-@model({ settings: { strict: true } })
+@model({settings: {strict: true}})
 export class Restaurant extends Entity {
   @property({
     type: 'string',
@@ -56,6 +56,11 @@ export class Restaurant extends Entity {
 
   @hasMany(() => Product)
   products: Product[];
+
+  @property({
+    type: 'string',
+  })
+  orderId?: string;
   // Define well-known properties here
 
   // Indexer property to allow additional data

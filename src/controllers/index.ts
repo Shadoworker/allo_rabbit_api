@@ -49,3 +49,4 @@ export * from './restaurant-product.controller';
 export * from './ar-user-product-category.controller';
 export * from './order-deliverer.controller';
 export * from './deliverer-order.controller';
+export * from './ar-user-order.controller';

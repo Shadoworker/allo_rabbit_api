@@ -15,12 +15,15 @@ let ArUserRepository = class ArUserRepository extends repository_1.DefaultCrudRe
     constructor(dataSource, 
     // @inject(`datasources.${ArUserServiceBindings.DATASOURCE_NAME}`)
     // dataSource: juggler.DataSource,
-    userCredentialsRepositoryGetter, arUserCredentialsRepositoryGetter, restaurantRepositoryGetter, productCategoryRepositoryGetter) {
+    userCredentialsRepositoryGetter, arUserCredentialsRepositoryGetter, restaurantRepositoryGetter, productCategoryRepositoryGetter, orderRepositoryGetter) {
         super(models_1.ArUser, dataSource);
         this.userCredentialsRepositoryGetter = userCredentialsRepositoryGetter;
         this.arUserCredentialsRepositoryGetter = arUserCredentialsRepositoryGetter;
         this.restaurantRepositoryGetter = restaurantRepositoryGetter;
         this.productCategoryRepositoryGetter = productCategoryRepositoryGetter;
+        this.orderRepositoryGetter = orderRepositoryGetter;
+        this.orders = this.createHasManyThroughRepositoryFactoryFor('orders', orderRepositoryGetter, restaurantRepositoryGetter);
+        this.registerInclusionResolver('orders', this.orders.inclusionResolver);
         this.productCategories = this.createHasManyRepositoryFactoryFor('productCategories', productCategoryRepositoryGetter);
         this.registerInclusionResolver('productCategories', this.productCategories.inclusionResolver);
         this.restaurants = this.createHasManyRepositoryFactoryFor('restaurants', restaurantRepositoryGetter);
@@ -43,7 +46,8 @@ ArUserRepository = tslib_1.__decorate([
     tslib_1.__param(2, repository_1.repository.getter('ArUserCredentialsRepository')),
     tslib_1.__param(3, repository_1.repository.getter('RestaurantRepository')),
     tslib_1.__param(4, repository_1.repository.getter('ProductCategoryRepository')),
-    tslib_1.__metadata("design:paramtypes", [datasources_1.MysqlDatasourceDataSource, Function, Function, Function, Function])
+    tslib_1.__param(5, repository_1.repository.getter('OrderRepository')),
+    tslib_1.__metadata("design:paramtypes", [datasources_1.MysqlDatasourceDataSource, Function, Function, Function, Function, Function])
 ], ArUserRepository);
 exports.ArUserRepository = ArUserRepository;
 //# sourceMappingURL=ar-user.repository.js.map
