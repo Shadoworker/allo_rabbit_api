@@ -20,7 +20,7 @@ export type Credentials = {
   email: string;
   phone: string;
   password: string;
-  // userId: string;
+  userId: string;
   getId: any;
   getIdObject: any;
   toJSON: any;
