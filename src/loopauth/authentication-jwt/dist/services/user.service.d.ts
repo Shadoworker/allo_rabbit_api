@@ -11,11 +11,11 @@ export declare type Credentials = {
     email: string;
     phone: string;
     password: string;
-    userId: string;
-    getId: any;
-    getIdObject: any;
-    toJSON: any;
-    toObject: any;
+    // userId: string;
+    // getId: any;
+    // getIdObject: any;
+    // toJSON: any;
+    // toObject: any;
 };
 export declare class MyUserService implements UserService<User, Credentials> {
     userRepository: UserRepository;

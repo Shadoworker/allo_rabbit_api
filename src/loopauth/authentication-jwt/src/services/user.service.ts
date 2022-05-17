@@ -3,7 +3,7 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-import { UserService } from '@loopback/authentication';
+import { UserService } from '../../../authentication/src/services/index';
 import { repository } from '@loopback/repository';
 import { HttpErrors } from '@loopback/rest';
 import { securityId, UserProfile } from '@loopback/security';
@@ -20,11 +20,11 @@ export type Credentials = {
   email: string;
   phone: string;
   password: string;
-  userId: string;
-  getId: any;
-  getIdObject: any;
-  toJSON: any;
-  toObject: any;
+  // userId: string;
+  // getId: any;
+  // getIdObject: any;
+  // toJSON: any;
+  // toObject: any;
 };
 
 export class MyUserService implements UserService<User, Credentials> {
